@@ -87,7 +87,7 @@
         fixed: false,
         items: [{
           icon: 'bubble_chart',
-          title: 'Inspire'
+          title: 'Software Engineering'
         }],
         miniVariant: false,
         right: true,
