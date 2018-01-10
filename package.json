@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "node server.js",   <--- EDIT THIS LINE HERE 
+    "start": "node server.js", //Line added from tutorial
     "build": "node build/build.js"
   },
   "dependencies": {
