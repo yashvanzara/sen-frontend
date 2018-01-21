@@ -1,6 +1,7 @@
 # sen_frontend
 
 > Front-end for SEN Project
+> Tools: Vue.js, Vuetify.js
 
 ## Build Setup
 
