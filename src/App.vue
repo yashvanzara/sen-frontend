@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer absolute temporary v-model="sideNav" disable-resize-watcher="false">
+    <v-navigation-drawer absolute temporary v-model="sideNav">
       <!--Navigation Drawer, visible only on xs devices-->
       <v-list>
         <v-list-tile v-for="menuItem in menuItems" :key="menuItem.name" :to="menuItem.link">
@@ -47,27 +47,23 @@
       return {
         title: 'Placement Portal',
         sideNav: false,
-        menuItems: [
-          {
-            link: '/',
-            icon: 'dashboard',
-            name: 'Dashboard'
-          },
-          {
-            link: '/profile',
-            icon: 'face',
-            name: 'Profile'
-          }, {
-            link: '/login',
-            icon: 'exit_to_app',
-            name: 'Login'
-          }
-
-        ]
       }
     },
-    computed : {
-
+    computed: {
+      menuItems() {
+        /*Dynamically generate menuitems based on user login status*/
+        let menuItems = [
+          {link: '/studentregister', icon: 'account_circle', name: 'Reigster'},
+          {link: '/login', icon: 'exit_to_app', name: 'Login'},
+          {link: '/home', icon: 'dashboard', name: 'Dashboard'},
+          {link: '/profile', icon: 'face', name: 'Profile'}
+        ]
+        return menuItems
+      },
+      userIsAuthenticated() {
+        //return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+        return this.logged
+      }
     }
   }
 </script>

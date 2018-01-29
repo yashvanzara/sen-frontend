@@ -6,7 +6,7 @@
         <v-form>
           <v-text-field
             label="Student ID"
-            required="true"
+            required
           >
           </v-text-field>
           <v-text-field
@@ -14,7 +14,7 @@
             label="Password">
           </v-text-field>
         </v-form>
-        <v-btn primary>Login</v-btn>
+        <v-btn color="primary">Login</v-btn>
       </v-flex>
     </v-layout>
   </v-container>
