@@ -10,6 +10,7 @@
           >
           </v-text-field>
           <v-text-field
+            required
             type="password"
             label="Password">
           </v-text-field>

@@ -18,7 +18,10 @@
         @click.stop="sideNav = !sideNav"
         class="hidden-sm-and-up"></v-toolbar-side-icon>
       <v-toolbar-title>
-        <router-link to="/" tag="span" tyle="cursor: pointer">DA Placement Portal
+        <router-link to="/" tag="span" style="cursor: pointer" class="hidden-xs-only">DA Placement Portal
+          <v-icon x-large dark>school</v-icon>
+        </router-link>
+        <router-link to="/" tag="span" style="cursor: pointer" class="hidden-sm-and-up">DAIICT
           <v-icon x-large dark>school</v-icon>
         </router-link>
       </v-toolbar-title>
@@ -36,7 +39,9 @@
     </v-toolbar>
     <main>
       <!--Any changes to routes will be pushed here-->
-      <router-view></router-view>
+      <transition name="fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </main>
   </v-app>
 </template>
@@ -67,3 +72,12 @@
     }
   }
 </script>
+<style>
+  /*Transition for main router view*/
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .25s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+</style>
