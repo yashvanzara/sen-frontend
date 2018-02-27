@@ -1,6 +1,6 @@
 export default {
   state: {
-    user:true
+    user:null
   },
   mutations:{
 
