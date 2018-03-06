@@ -1,30 +1,30 @@
 export default {
   id: 0,
   //Personal Details
-  fname:"",
-  lname:"",
+  f_name:"",
+  l_name:"",
   //Personal Email ID
   email: "",
   gender:"",
   phone:"",
   dob:"",
-  permanentAddress:"",
-  currentAddress:"",
+  permanent_address:"",
+  current_address:"",
   //Academic details
   program:"",
-  startDate:"",
-  sscPercent:"",
-  hscPercent:"",
-  hscStream:"",
-  qualifyingPercent:"",
-  qualifyingYear:"",
-  qualifyingBoard:"",
-  qualifyingDegree:"",
+  start_date:"",
+  ssc_percent:"",
+  hsc_percent:"",
+  hsc_stream:"",
+  qualifying_percent:"",
+  qualifying_year:"",
+  qualifying_board:"",
+  qualifying_degree:"",
   cpi:"",
-  isPlaced:"",
+  is_placed:"",
   //Other details
   //flag = User, Admin, SPC to be handled using bitfields
-  userType:"",
+  user_type:"",
   //Indicates whether the user is active member of the institute or not
-  isActive:true,
+  is_active:true,
 };
