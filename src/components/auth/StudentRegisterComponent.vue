@@ -57,14 +57,14 @@
           </v-card>
 
           <v-select
-            v-bind:items="programs"
+            v-bind:items="loadedPrograms"
             v-model="program"
-            label="program"
+            label="Program"
             single-line
-            item-text="program_id"
-            item-value="program_text"
+            item-text="program_name"
+            item-value="id"
             return-object
-            :hint="`${program.program_id}, ${program.program_text}`"
+            :hint="`${program.program_name}`"
             persistent-hint
           ></v-select>
         </v-form>
@@ -78,13 +78,7 @@
   export default {
     data() {
       return {
-        program: {program_id: 'B.Tech', program_text: 'Bachelor of Technology'},
-        programs: [
-          {program_id: 'B.Tech', program_text: 'Bachelor of Technology'},
-          {program_id: 'M.Tech', program_text: 'Master of Technology'},
-          {program_id: 'M.Sc.IT', program_text: 'Master of Science in Information Technology'},
-          {program_id: 'Ph.d', program_text: 'Research Scholar'},
-        ],
+        program: {id: '1', program_name: 'Master of Science in Inforrmation Technology'},
         gender: 'Male',
         genders: ['Male', 'Female'],
         date: null,
@@ -92,12 +86,16 @@
         menu: false
       }
     },
+    computed:{
+      loadedPrograms(){
+        return this.$store.getters.loadedPrograms
+      }
+    },
     methods: {
       formatDate(date) {
         if (!date) {
           return null
         }
-
         const [year, month, day] = date.split('-')
         return `${month}/${day}/${year}`
       },
@@ -105,7 +103,6 @@
         if (!date) {
           return null
         }
-
         const [month, day, year] = date.split('/')
         return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
       }

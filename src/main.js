@@ -9,7 +9,7 @@ import { HalfCircleSpinner } from 'epic-spinners'
 import { FulfillingBouncingCircleSpinner } from 'epic-spinners'
 import LoginComponent from './components/auth/LoginComponent'
 import StudentRegisterComponent from './components/auth/StudentRegisterComponent'
-import ProgramComponent from './components/Utility/Program'
+import ProgramComponent from './components/Utility/ProgramComponent'
 
 /*Spinners*/
 Vue.component('half-circle-spinner', HalfCircleSpinner)
