@@ -1,16 +1,18 @@
 import program from "../../models/program";
-
+import axios from 'axios'
+const BASE_URL = 'http://localhost:3000'
+const MODEL_URL = '/program/'
 export default {
   state: {
     loadedPrograms:[
       {
-        id:1,
-        program_name: 'Master of Science in Information Technology',
-        program_is_active: true
+        program_Id:1,
+        program_Name: 'Master of Science in Information Technology',
+        program_IsActive: true,
       }
     ],
     loading:false,
-    error:null
+    error:null,
   },
   mutations:{
     createProgram(state, payload){
@@ -22,17 +24,17 @@ export default {
       })
       const index = state.loadedPrograms.indexOf(program)
 
-      if(payload.program_name){
-        program.program_name = payload.program_name
+      if(payload.program_Name){
+        program.program_Name = payload.program_Name
       }
-      if(payload.program_is_active != null){
-        program.program_is_active = payload.program_is_active
+      if(payload.program_IsActive != null){
+        program.program_IsActive = payload.program_IsActive
       }
       state.loadedPrograms[index] = program
     },
     deleteProgram(state, payload){
       state.loadedPrograms = state.loadedPrograms.filter(program => {
-        return program.id !== payload.id
+        return program.program_Id !== payload.program_Id
       })
     },
     setLoadedPrograms(state, payload){
@@ -42,18 +44,45 @@ export default {
   actions:{
     loadPrograms({commit}){
       //TODO: Fetch Meetups from Backend and mutate setloaded programs by payload
+      axios.get(BASE_URL + MODEL_URL)
+        .then(response => {
+          console.log(response.data)
+          commit('setLoadedPrograms', response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     createProgram({commit, getters}, payload){
-      const program = {
-        program_is_active:payload.program_is_active,
-        id:Math.random(),
-        program_name:payload.program_name
+      var program = {
+        program_IsActive:payload.program_IsActive,
+        program_Name:payload.program_Name,
+        program_Id:null
       }
-      commit('createProgram', program)
+      axios.post(BASE_URL + MODEL_URL, program)
+        .then(response => {
+          console.log(response.data)
+          program = response.data
+          //TODO: Handle program_Id in the backend so that refresh of page is not required for vuex
+          commit('createProgram', program)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
       //TODO: Push programs to backend
     },
     deleteProgram({commit, getters}, payload){
-      commit('deleteProgram', payload)
+      axios.delete(BASE_URL + MODEL_URL + payload.program_Id)
+        .then(response => {
+          console.log(response.data)
+          commit('deleteProgram', payload)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+
       //TODO: Delete programs from backend
     },
     updateProgram({commit, getters}, payload){

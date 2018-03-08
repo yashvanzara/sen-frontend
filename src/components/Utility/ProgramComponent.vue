@@ -13,14 +13,16 @@
           <v-container>
             <v-layout row wrap>
               <v-flex>
-                <v-text-field label="Program Name" v-model="editedItem.program_name"></v-text-field>
+                <v-text-field label="Program Name" v-model="editedItem.program_Name"></v-text-field>
               </v-flex>
             </v-layout>
             <v-layout row wrap>
               <v-flex>
                 <v-switch
-                  :label="`Active: ${editedItem.program_is_active.toString()}`"
-                  v-model="editedItem.program_is_active"
+                  :label="`Active: ${editedItem.program_IsActive === 1}`"
+                  v-model="editedItem.program_IsActive"
+                  :true-value="1"
+                  :false-value="0"
                 ></v-switch>
               </v-flex>
             </v-layout>
@@ -53,8 +55,8 @@
       :search="search"
       hide-actions>
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.program_name }}</td>
-        <td class="text-xs-right">{{ props.item.program_is_active }}</td>
+        <td>{{ props.item.program_Name }}</td>
+        <td class="text-xs-right">{{ props.item.program_IsActive===1 }}</td>
         <td class="justify-center layout px-0">
           <v-btn icon class="mx-0" @click="editItem(props.item)">
             <v-icon color="teal">edit</v-icon>
@@ -111,12 +113,12 @@
         search:'',
         headers: ProgramModel.headers,
         editedItem: {
-          program_name: "",
-          program_is_active: false
+          program_Name: "",
+          program_IsActive: 0
         },
         defaultItem: {
-          program_name: "",
-          program_is_active: false
+          program_Name: "",
+          program_IsActive: 0
         }
       }
     },
@@ -166,6 +168,7 @@
       },
     },
     created() {
+      this.$store.dispatch('loadPrograms')
       this.items = this.$store.getters.loadedPrograms
     }
   }

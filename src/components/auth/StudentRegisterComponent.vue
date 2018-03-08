@@ -61,10 +61,10 @@
             v-model="program"
             label="Program"
             single-line
-            item-text="program_name"
+            item-text="program_Name"
             item-value="id"
             return-object
-            :hint="`${program.program_name}`"
+            :hint="`${program.program_Name}`"
             persistent-hint
           ></v-select>
         </v-form>
@@ -78,7 +78,7 @@
   export default {
     data() {
       return {
-        program: {id: '1', program_name: 'Master of Science in Inforrmation Technology'},
+        program: {id: '1', program_Name: 'Master of Science in Inforrmation Technology'},
         gender: 'Male',
         genders: ['Male', 'Female'],
         date: null,

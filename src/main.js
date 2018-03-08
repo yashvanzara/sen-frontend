@@ -31,5 +31,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  BASE_URL:'http://localhost:3000/',
   render: h => h(App)
 })

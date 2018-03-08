@@ -1,14 +1,14 @@
 export default{
   program_id:"",
-  program_name:"",
-  program_is_active:"",
+  program_Name:"",
+  program_IsActive:"",
   headers: [
     {
       text: 'Program Name',
       align: 'left',
       sortable: false,
-      value: 'program_name'
+      value: 'program_Name'
     },
-    { text: 'Active', value: 'program_is_active' },
+    { text: 'Active', value: 'program_IsActive' },
   ]
 };
