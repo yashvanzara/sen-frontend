@@ -51,6 +51,9 @@
           <v-text-field required type="password" label="Password"></v-text-field>
           <v-text-field required type="phone" label="Phone"
                         hint="Notifications will communicated on this number"></v-text-field>
+          <v-text-field required type="address" label="Permanant Address"></v-text-field>
+          <v-text-field required type="address" label="Current Address"></v-text-field>
+
           <!--End of Personal Information Section-->
           <v-card color="primary--text">
             <v-card-title>Academics Section</v-card-title>
@@ -67,6 +70,27 @@
             :hint="`${program.program_Name}`"
             persistent-hint
           ></v-select>
+
+          <v-layout row wrap>
+            <v-flex  lg4 xs8 s8>
+              <v-text-field label="Qualifying Board"></v-text-field>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-flex lg4 xs3 sm3>
+              <v-text-field label="Percentage"></v-text-field>
+            </v-flex>
+          </v-layout>
+
+          <v-layout row wrap>
+            <v-flex  lg4 xs8 s8>
+              <v-text-field label="Qualifying Degree"></v-text-field>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-flex lg4 xs3 sm3>
+              <v-text-field label="CPI"></v-text-field>
+            </v-flex>
+          </v-layout>
+
         </v-form>
         <v-btn class="right" color="primary">Register</v-btn>
       </v-flex>

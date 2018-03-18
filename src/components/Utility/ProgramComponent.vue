@@ -137,7 +137,7 @@
     },
     methods: {
       editItem(item) {
-        this.editedIndex = this.items.indexOf(item)
+        this.editedIndex = this.loadedPrograms.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
 
@@ -153,6 +153,7 @@
         this.snackbar=true
         this.color = 'green'
         if (this.editedIndex > -1) {
+          console.log(this.editedItem)
           this.$store.dispatch('updateProgram', this.editedItem)
         } else {
           this.$store.dispatch('createProgram', this.editedItem)

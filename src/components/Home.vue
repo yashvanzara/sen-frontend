@@ -4,8 +4,10 @@
       <v-flex>
         <h1>Hello world</h1>
         <app-program></app-program>
+
       </v-flex>
     </v-layout>
+    <app-company></app-company>
   </v-container>
 </template>
 

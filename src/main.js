@@ -10,6 +10,7 @@ import { FulfillingBouncingCircleSpinner } from 'epic-spinners'
 import LoginComponent from './components/auth/LoginComponent'
 import StudentRegisterComponent from './components/auth/StudentRegisterComponent'
 import ProgramComponent from './components/Utility/ProgramComponent'
+import CompanyComponent from './components/Utility/CompanyComponent'
 
 /*Spinners*/
 Vue.component('half-circle-spinner', HalfCircleSpinner)
@@ -23,6 +24,7 @@ Vue.use(Vuetify)
 Vue.component('app-student-register-component', StudentRegisterComponent)
 Vue.component('app-login-component', LoginComponent)
 Vue.component('app-program', ProgramComponent)
+Vue.component('app-company', CompanyComponent)
 Vue.config.productionTip = false
 
 

@@ -15,8 +15,10 @@
             label="Password">
           </v-text-field>
         </v-form>
+        <p class="right">Forgot Password?</p>
         <v-btn color="primary">Login</v-btn>
       </v-flex>
+
     </v-layout>
   </v-container>
 </template>

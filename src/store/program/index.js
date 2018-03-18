@@ -19,18 +19,14 @@ export default {
       state.loadedPrograms.push(payload)
     },
     updateProgram(state, payload){
-      const program = state.loadedPrograms.find(program => {
-        return program.id === payload.id
+      var program = state.loadedPrograms.find(program => {
+        return program.program_Id === payload.program_Id
       })
       const index = state.loadedPrograms.indexOf(program)
-
-      if(payload.program_Name){
-        program.program_Name = payload.program_Name
+      if(index!=-1){
+        state.loadedPrograms.splice(index,1)
+        state.loadedPrograms.push(payload)
       }
-      if(payload.program_IsActive != null){
-        program.program_IsActive = payload.program_IsActive
-      }
-      state.loadedPrograms[index] = program
     },
     deleteProgram(state, payload){
       state.loadedPrograms = state.loadedPrograms.filter(program => {
@@ -86,7 +82,13 @@ export default {
       //TODO: Delete programs from backend
     },
     updateProgram({commit, getters}, payload){
-      commit('updateProgram', payload)
+      axios.put(BASE_URL + MODEL_URL + payload.program_Id, payload)
+        .then(response => {
+          commit('updateProgram', payload)
+        })
+        .catch(error => {
+          console.log(error);
+        })
       //TODO: Update program in backend
     }
   },
