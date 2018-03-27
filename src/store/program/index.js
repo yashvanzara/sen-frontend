@@ -49,7 +49,7 @@ export default {
           console.log(error)
         })
     },
-    createProgram({commit, getters}, payload){
+    createProgram({commit, getters, dispatch}, payload){
       var program = {
         program_IsActive:payload.program_IsActive,
         program_Name:payload.program_Name,
@@ -60,8 +60,11 @@ export default {
           console.log(response.data)
           program = response.data
           //TODO: Handle program_Id in the backend so that refresh of page is not required for vuex
-          commit('createProgram', program)
+          commit('createProgram', program);
+          dispatch('loadPrograms')
+          //Calling dispatch loadPrograms again to mitigate problem where we cannot get newly created object with the new PK
         })
+
         .catch(error => {
           console.log(error)
         })
@@ -89,7 +92,6 @@ export default {
         .catch(error => {
           console.log(error);
         })
-      //TODO: Update program in backend
     }
   },
   getters:{

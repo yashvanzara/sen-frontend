@@ -8,10 +8,10 @@
           <v-card color="primary--text">
             <v-card-title>Personal Information Section</v-card-title>
           </v-card>
-
-          <v-text-field required label="First Name"></v-text-field>
-          <v-text-field required label="Middle Name"></v-text-field>
-          <v-text-field required label="Last Name"></v-text-field>
+          <v-text-field required label="Student ID" v-model="user.user_StudentId"></v-text-field>
+          <v-text-field required label="First Name" v-model="user.user_FirstName"></v-text-field>
+          <v-text-field required label="Middle Name" v-model="user.user_MiddleName"></v-text-field>
+          <v-text-field required label="Last Name" v-model="user.user_LastName"></v-text-field>
 
           <!--Gender and Date of Birth-->
           <v-layout row wrap>
@@ -21,7 +21,7 @@
             <v-flex lg4 xs6 sm6>
               <v-select
                 v-bind:items="genders"
-                v-model="gender"
+                v-model="user.user_Gender"
                 label="Gender"
                 single-line
                 bottom
@@ -33,8 +33,8 @@
             </v-flex>
             <v-flex lg4 xs6 sm6>
               <v-menu lazy :close-on-content-click="false" v-model="menu" transition="scale-transition" offset-y full-width :nudge-right="40" max-width="290px" min-width="290px">
-                <v-text-field required readonly slot="activator" label="MM/DD/YY" v-model="dateFormatted" prepend-icon="event" @blur="date = parseDate(dateFormatted)"></v-text-field>
-                <v-date-picker v-model="date" @input="dateFormatted = formatDate($event)" no-title scrollable actions>
+                <v-text-field required readonly slot="activator" label="MM/DD/YY" v-model="user.user_DateOfBirth" prepend-icon="event" @blur="date = parseDate(dateFormatted)"></v-text-field>
+                <v-date-picker v-model="date" @input="user.user_DateOfBirth = formatDate($event)" no-title scrollable actions>
                   <template slot-scope="{ save, cancel }">
                     <v-card-actions>
                       <v-spacer></v-spacer>
@@ -47,12 +47,12 @@
             </v-flex>
           </v-layout>
           <!--End of Gender and Date of Birth-->
-          <v-text-field required type="email" label="Email"></v-text-field>
-          <v-text-field required type="password" label="Password"></v-text-field>
-          <v-text-field required type="phone" label="Phone"
+          <v-text-field required type="email" v-model="user.user_EmailId" label="Email"></v-text-field>
+          <v-text-field required type="password"v-model="user.user_Password" label="Password"></v-text-field>
+          <v-text-field required type="phone" v-model="user.user_ContactNo" label="Phone"
                         hint="Notifications will communicated on this number"></v-text-field>
-          <v-text-field required type="address" label="Permanant Address"></v-text-field>
-          <v-text-field required type="address" label="Current Address"></v-text-field>
+          <v-text-field required type="address"v-model="user.user_AddressPermanent" label="Permanant Address"></v-text-field>
+          <v-text-field required type="address" v-model="user.user_AddressCurrent" label="Current Address"></v-text-field>
 
           <!--End of Personal Information Section-->
           <v-card color="primary--text">
@@ -73,26 +73,26 @@
 
           <v-layout row wrap>
             <v-flex  lg4 xs8 s8>
-              <v-text-field label="Qualifying Board"></v-text-field>
+              <v-text-field label="Qualifying Board" v-model="user.user_QualifyingBoard"></v-text-field>
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex lg4 xs3 sm3>
-              <v-text-field label="Percentage"></v-text-field>
+              <v-text-field label="Percentage" v-model="user.user_QualifyingPercentage"></v-text-field>
             </v-flex>
           </v-layout>
 
           <v-layout row wrap>
             <v-flex  lg4 xs8 s8>
-              <v-text-field label="Qualifying Degree"></v-text-field>
+              <v-text-field label="Qualifying Degree" v-model="user.user_QualifyingDegree"></v-text-field>
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex lg4 xs3 sm3>
-              <v-text-field label="CPI"></v-text-field>
+              <v-text-field label="Stream" v-model="user.user_Stream"></v-text-field>
             </v-flex>
           </v-layout>
 
         </v-form>
-        <v-btn class="right" color="primary">Register</v-btn>
+        <v-btn @click="addUser" class="right" color="primary">Register</v-btn>
       </v-flex>
     </v-layout>
   </v-container>
@@ -103,17 +103,45 @@
     data() {
       return {
         program: {id: '1', program_Name: 'Master of Science in Inforrmation Technology'},
-        gender: 'Male',
         genders: ['Male', 'Female'],
         date: null,
         dateFormatted: null,
-        menu: false
+        menu: false,
+        user:{
+          user_StudentId:2017,
+          user_TypeFlag:2,
+          user_FirstName:"",
+          user_MiddleName:"",
+          user_LastName:"",
+          user_Password:"",
+          user_DateOfBirth:this.dateFormatted,
+          user_Gender:"M",
+          user_ContactNo:"",
+          user_EmailId:"",
+          user_AddressPermanent:"",
+          user_AddressCurrent:"",
+          user_ProgramId:1,
+          user_JoinDate:new Date(),
+          user_SscYear:2012,
+          user_HscYear:2014,
+          user_QualifyingBoard:"",
+          user_QualifyingPercentage:"",
+          user_QualifyingDegree:"",
+          user_Stream:"",
+          user_Cpi:0,
+          user_CurrentBacklog:0,
+          user_TotalBacklog:0,
+          user_IsPlaced:0,
+          user_IsInterested:1,
+          user_IsActive:1
+        }
       }
     },
     computed:{
       loadedPrograms(){
         return this.$store.getters.loadedPrograms
-      }
+      },
+
     },
     methods: {
       formatDate(date) {
@@ -129,7 +157,13 @@
         }
         const [month, day, year] = date.split('/')
         return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+      },
+      addUser(){
+        this.$store.dispatch('createUser', this.user);
       }
+    },
+    created(){
+      this.$store.dispatch('loadPrograms');
     }
   }
 </script>

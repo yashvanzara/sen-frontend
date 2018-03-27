@@ -55,7 +55,7 @@ export default {
           console.log(error)
         })
     },
-    createCompany({commit, getters}, payload){
+    createCompany({commit, getters, dispatch}, payload){
       console.log("Create called")
       axios.post(BASE_URL + MODEL_URL, payload)
         .then(response => {
@@ -63,6 +63,7 @@ export default {
           const company = response.data
           //TODO: Handle program_Id in the backend so that refresh of page is not required for vuex
           commit('createCompany', company)
+          dispatch('loadCompanies')//Handle Backend flaws by requesting new dataset again
         })
         .catch(error => {
           console.log(error)

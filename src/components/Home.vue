@@ -8,6 +8,7 @@
       </v-flex>
     </v-layout>
     <app-company></app-company>
+    <app-users></app-users>
   </v-container>
 </template>
 
