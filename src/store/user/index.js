@@ -38,10 +38,15 @@ export default {
     error:null
   },
   mutations:{
-
+    setLoadedUsers(state, payload){
+      state.loadedUsers = payload;
+    },
+    createUser(state, payload){
+      state.loadedUsers.push(payload)
+    }
   },
   actions:{
-    createUser({commit, getters}, payload){
+    createUser({commit, getters, dispatch}, payload){
       console.log(payload.user_AddressCurrent)
       console.log(BASE_URL+MODEL_URL)
       for(var i in payload) {
@@ -50,6 +55,7 @@ export default {
       axios.post(BASE_URL + MODEL_URL, payload)
         .then(response => {
           commit('createUser', payload)
+          dispatch('loadUsers')
         })
         .catch(error => {
           console.log("Error"+error.data)
@@ -59,6 +65,7 @@ export default {
       axios.get(BASE_URL + MODEL_URL)
         .then(response => {
           console.log(response.data)
+          commit('setLoadedUsers', response.data)
         })
         .catch(error => {
           console.log(error)
@@ -67,6 +74,8 @@ export default {
     }
   },
   getters:{
-
+    loadedUsers(state){
+      return state.loadedUsers
+    }
   }
 }

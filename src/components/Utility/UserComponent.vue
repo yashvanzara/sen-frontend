@@ -54,7 +54,10 @@
         :search="search"
         hide-actions>
         <template slot="items" slot-scope="props">
+          <td>{{ props.item.user_StudentId }}</td>
           <td>{{ props.item.user_FirstName }}</td>
+          <td>{{ props.item.user_LastName }}</td>
+          <td>{{ getProgramNameFromId(props.item.user_ProgramId) }}</td>
           <td class="text-xs-right">{{ props.item.user_IsActive===1 }}</td>
           <td class="justify-center layout px-0">
             <v-btn icon class="mx-0" @click="editItem(props.item)">
@@ -74,9 +77,23 @@
 </template>
 
 <script>
+  import UserModel from '../../models/user'
   export default {
     data(){
       return {
+        snackbar:false,
+        y: 'top',
+        x: null,
+        mode: '',
+        color:'green',
+        timeout: 5000,
+        snackText:'Changes Saved Successfully',
+        dialog: false,
+        editedIndex: -1,
+        dialog: false,
+
+        //Data Table items
+        search:'',
         editedItem:{
           user_StudentId:"",
           user_TypeFlag:2,
@@ -104,16 +121,38 @@
           user_IsPlaced:0,
           user_IsInterested:1,
           user_IsActive:1
-        }
+        },
+        headers:UserModel.headers,
+      }
+    },
+    watch: {
+      dialog(val) {
+        val || this.close()
       }
     },
     computed:{
+      formTitle() {
+        return this.editedIndex === -1 ? 'Add Program' : 'Edit Program'
+      },
       loadedUsers() {
         return this.$store.getters.loadedUsers
+      },
+      loadedPrograms(){
+        return this.$store.getters.loadedPrograms
+      }
+    },
+    methods:{
+      getProgramNameFromId(id){
+        var program = this.loadedPrograms.find(program => {
+          return program.program_Id === id
+        })
+        const index = this.loadedPrograms.indexOf(program);
+        return this.loadedPrograms[index].program_Name
       }
     },
     created(){
       this.$store.dispatch('loadUsers');
+      this.items = this.$store.getters.loadedUsers
     }
   }
 </script>
