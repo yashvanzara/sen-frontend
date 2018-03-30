@@ -107,7 +107,6 @@
         snackText:'Changes Saved Successfully',
         dialog: false,
         editedIndex: -1,
-        dialog: false,
 
         //Data Table items
         search:'',

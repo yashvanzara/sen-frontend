@@ -43,15 +43,25 @@ export default {
     },
     createUser(state, payload){
       state.loadedUsers.push(payload)
-    }
+    },
+    updateUser(state, payload){
+      var user = state.loadedUsers.find(user => {
+        return user.user_StudentId === payload.user_StudentId
+      })
+      const index = state.loadedUsers.indexOf(user)
+      if(index!=-1){
+        state.loadedUsers.splice(index, 1)
+        state.loadedUsers.push(payload)
+      }
+    },
+    deleteUser(state, payload){
+      state.loadedUsers = state.loadedUsers.filter(user => {
+        return user.user_StudentId !== payload.user_StudentId
+      })
+    },
   },
   actions:{
     createUser({commit, getters, dispatch}, payload){
-      console.log(payload.user_AddressCurrent)
-      console.log(BASE_URL+MODEL_URL)
-      for(var i in payload) {
-        console.log (i, payload[i])
-      }
       axios.post(BASE_URL + MODEL_URL, payload)
         .then(response => {
           commit('createUser', payload)
@@ -70,7 +80,24 @@ export default {
         .catch(error => {
           console.log(error)
         })
-
+    },
+    updateUser({commit, getters}, payload){
+      axios.put(BASE_URL + MODEL_URL + payload.user_StudentId, payload)
+        .then(response => {
+          commit('updateUser', payload)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    deleteUser({commit, getters}, payload){
+      axios.delete(BASE_URL + MODEL_URL + payload.user_StudentId)
+        .then(response => {
+          commit('deleteUser', payload)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   },
   getters:{

@@ -34,7 +34,7 @@ export default {
         state.loadedCompanies.push(payload)
       }
     },
-    deleteProgram(state, payload){
+    deleteCompany(state, payload){
       state.loadedCompanies = state.loadedCompanies.filter(company => {
         return company.company_Id !== payload.company_Id
       })

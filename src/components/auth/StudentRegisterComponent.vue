@@ -32,17 +32,31 @@
               <v-subheader>Date of Birth</v-subheader>
             </v-flex>
             <v-flex lg4 xs6 sm6>
-              <v-menu lazy :close-on-content-click="false" v-model="menu" transition="scale-transition" offset-y full-width :nudge-right="40" max-width="290px" min-width="290px">
-                <v-text-field required readonly slot="activator" label="MM/DD/YY" v-model="user.user_DateOfBirth" prepend-icon="event" @blur="date = parseDate(dateFormatted)"></v-text-field>
-                <v-date-picker v-model="date" @input="user.user_DateOfBirth = formatDate($event)" no-title scrollable actions>
-                  <template slot-scope="{ save, cancel }">
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-                      <v-btn flat color="primary" @click="save">OK</v-btn>
-                    </v-card-actions>
-                  </template>
-                </v-date-picker>
+              <v-menu
+                ref="menu"
+                lazy
+                :close-on-content-click="false"
+                v-model="menu"
+                transition="scale-transition"
+                offset-y
+                full-width
+                :nudge-right="40"
+                min-width="290px"
+              >
+                <v-text-field
+                  slot="activator"
+                  label="Birthday date"
+                  v-model="user.user_DateOfBirth"
+                  prepend-icon="event"
+                  readonly
+                ></v-text-field>
+                <v-date-picker
+                  ref="picker"
+                  v-model="user.user_DateOfBirth"
+                  @change="save"
+                  min="1950-01-01"
+                  :max="new Date().toISOString().substr(0, 10)"
+                ></v-date-picker>
               </v-menu>
             </v-flex>
           </v-layout>
@@ -105,7 +119,6 @@
         program: {id: '1', program_Name: 'Master of Science in Inforrmation Technology'},
         genders: ['Male', 'Female'],
         date: null,
-        dateFormatted: null,
         menu: false,
         user:{
           user_StudentId:2017,
@@ -143,23 +156,18 @@
       },
 
     },
+    watch: {
+      menu (val) {
+        val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
+      }
+    },
     methods: {
-      formatDate(date) {
-        if (!date) {
-          return null
-        }
-        const [year, month, day] = date.split('-')
-        return `${month}/${day}/${year}`
-      },
-      parseDate(date) {
-        if (!date) {
-          return null
-        }
-        const [month, day, year] = date.split('/')
-        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-      },
       addUser(){
         this.$store.dispatch('createUser', this.user);
+      },
+      save (date) {
+        this.$refs.menu.save(date)
+        console.log(date)
       }
     },
     created(){

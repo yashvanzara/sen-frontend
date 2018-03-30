@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Hello</h1>
     <v-container>
       <v-dialog v-model="dialog" max-width="500px" scrollable>
         <v-btn color="primary" dark slot="activator" class="mb-2">Add Company</v-btn>
