@@ -85,8 +85,7 @@
         class="elevation-1"
         :items="loadedCompanies"
         :headers="headers"
-        :search="search"
-        hide-actions>
+        :search="search">
         <template slot="items" slot-scope="props">
           <td>{{ props.item.company_Name }}</td>
           <td>{{ props.item.company_Address }}</td>

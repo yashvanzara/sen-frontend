@@ -52,8 +52,7 @@
       class="elevation-1"
       :items="loadedPrograms"
       :headers="headers"
-      :search="search"
-      hide-actions>
+      :search="search">
       <template slot="items" slot-scope="props">
         <td>{{ props.item.program_Name }}</td>
         <td class="text-xs-right">{{ props.item.program_IsActive===1 }}</td>
@@ -139,7 +138,6 @@
         this.editedIndex = this.loadedPrograms.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
-
       },
       deleteItem(item) {
         const index = this.loadedPrograms.indexOf(item)

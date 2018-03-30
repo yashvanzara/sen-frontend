@@ -1,6 +1,7 @@
 import program from "../../models/program";
 import axios from 'axios'
-const BASE_URL = 'http://localhost:3000'
+import CONSTANTS from '../../Utility/constants'
+const BASE_URL = CONSTANTS.BASE_URL
 const MODEL_URL = '/program/'
 export default {
   state: {
@@ -23,7 +24,7 @@ export default {
         return program.program_Id === payload.program_Id
       })
       const index = state.loadedPrograms.indexOf(program)
-      if(index!=-1){
+      if(index!==-1){
         state.loadedPrograms.splice(index,1)
         state.loadedPrograms.push(payload)
       }

@@ -1,6 +1,7 @@
 import company from "../../models/program";
 import axios from 'axios'
-const BASE_URL = 'http://localhost:3000'
+import CONSTANTS from '../../Utility/constants'
+const BASE_URL = CONSTANTS.BASE_URL
 const MODEL_URL = '/company/'
 export default {
   state: {
@@ -61,15 +62,12 @@ export default {
         .then(response => {
           console.log(response.data)
           const company = response.data
-          //TODO: Handle program_Id in the backend so that refresh of page is not required for vuex
           commit('createCompany', company)
           dispatch('loadCompanies')//Handle Backend flaws by requesting new dataset again
         })
         .catch(error => {
           console.log(error)
         })
-
-      //TODO: Push programs to backend
     },
     deleteCompany({commit, getters}, payload){
       axios.delete(BASE_URL + MODEL_URL + payload.company_Id)
@@ -80,9 +78,6 @@ export default {
         .catch(error => {
           console.log(error)
         })
-
-
-      //TODO: Delete programs from backend
     },
     updateCompany({commit, getters}, payload){
       console.log("Update called")
@@ -93,7 +88,6 @@ export default {
         .catch(error => {
           console.log(error);
         })
-      //TODO: Update program in backend
     }
   },
   getters:{

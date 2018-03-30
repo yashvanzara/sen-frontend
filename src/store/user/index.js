@@ -1,5 +1,6 @@
 import axios from 'axios'
-const BASE_URL = 'http://localhost:3000'
+import CONSTANTS from '../../Utility/constants'
+const BASE_URL = CONSTANTS.BASE_URL
 const MODEL_URL = '/user/'
 export default {
   state: {

@@ -114,7 +114,9 @@
         :items="loadedUsers"
         :headers="headers"
         :search="search"
-        hide-actions>
+        prev-icon="mdi-menu-left"
+        next-icon="mdi-menu-right"
+        >
         <template slot="items" slot-scope="props">
           <td>{{ props.item.user_StudentId }}</td>
           <td>{{ props.item.user_FirstName }}</td>
