@@ -5,7 +5,7 @@ export default{
     {
       text: 'Tags',
       align: 'left',
-      sortable: false,
+      sortable: true,
       value: 'allTags_TagName'
     },
   ]

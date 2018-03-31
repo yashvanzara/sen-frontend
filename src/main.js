@@ -13,6 +13,10 @@ import ProgramComponent from './components/Utility/ProgramComponent'
 import CompanyComponent from './components/Utility/CompanyComponent'
 import UserComponent from './components/Utility/UserComponent'
 import TagsComponent from './components/Utility/TagsComponent'
+import QuestionComponent from './components/Utility/QuestionComponent'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+
 /*Spinners*/
 Vue.component('half-circle-spinner', HalfCircleSpinner)
 Vue.component('fulfilling-bouncing-circle-spinner' ,FulfillingBouncingCircleSpinner)
@@ -21,6 +25,7 @@ Vue.use(Vuex)
 /*Vuetify theme*/
 Vue.use(Vuetify)
 /*Custom Components*/
+Vue.use(mavonEditor)
 
 Vue.component('app-student-register-component', StudentRegisterComponent)
 Vue.component('app-login-component', LoginComponent)
@@ -28,6 +33,7 @@ Vue.component('app-program', ProgramComponent)
 Vue.component('app-company', CompanyComponent)
 Vue.component('app-users', UserComponent)
 Vue.component('app-tags', TagsComponent)
+Vue.component('app-questions', QuestionComponent)
 Vue.config.productionTip = false
 
 

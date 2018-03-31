@@ -40,7 +40,6 @@ export default {
   },
   actions:{
     loadPrograms({commit}){
-      //TODO: Fetch Meetups from Backend and mutate setloaded programs by payload
       axios.get(BASE_URL + MODEL_URL)
         .then(response => {
           console.log(response.data)
@@ -60,7 +59,6 @@ export default {
         .then(response => {
           console.log(response.data)
           program = response.data
-          //TODO: Handle program_Id in the backend so that refresh of page is not required for vuex
           commit('createProgram', program);
           dispatch('loadPrograms')
           //Calling dispatch loadPrograms again to mitigate problem where we cannot get newly created object with the new PK
@@ -69,8 +67,6 @@ export default {
         .catch(error => {
           console.log(error)
         })
-
-      //TODO: Push programs to backend
     },
     deleteProgram({commit, getters}, payload){
       axios.delete(BASE_URL + MODEL_URL + payload.program_Id)
@@ -81,9 +77,6 @@ export default {
         .catch(error => {
           console.log(error)
         })
-
-
-      //TODO: Delete programs from backend
     },
     updateProgram({commit, getters}, payload){
       axios.put(BASE_URL + MODEL_URL + payload.program_Id, payload)

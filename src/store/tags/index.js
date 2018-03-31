@@ -66,7 +66,6 @@ export default {
         })
     },
     updateTag({commit, getters}, payload){
-      console.log(BASE_URL + MODEL_URL + payload.allTags_Id)
       axios.put(BASE_URL + MODEL_URL + payload.allTags_Id, payload)
         .then(response => {
           commit('updateTag', payload)

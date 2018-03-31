@@ -99,7 +99,7 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    }
+    },
   },
   getters:{
     loadedUsers(state){
