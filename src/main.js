@@ -14,6 +14,7 @@ import CompanyComponent from './components/Utility/CompanyComponent'
 import UserComponent from './components/Utility/UserComponent'
 import TagsComponent from './components/Utility/TagsComponent'
 import QuestionComponent from './components/Utility/QuestionComponent'
+import JobProfileComponent from './components/Utility/JobProfile'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
@@ -34,6 +35,7 @@ Vue.component('app-company', CompanyComponent)
 Vue.component('app-users', UserComponent)
 Vue.component('app-tags', TagsComponent)
 Vue.component('app-questions', QuestionComponent)
+Vue.component('app-job-profile', JobProfileComponent)
 Vue.config.productionTip = false
 
 

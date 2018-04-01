@@ -5,6 +5,7 @@ import loadedPrograms from './program/index'
 import loadedCompanies from './company/index'
 import loadedTags from './tags/index'
 import loadedQuestions from './question/index'
+import loadedJobProfiles from './jobprofile/index'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -13,6 +14,7 @@ export const store = new Vuex.Store({
     programs:loadedPrograms,
     companies:loadedCompanies,
     tags:loadedTags,
-    questions:loadedQuestions
+    questions:loadedQuestions,
+    jobProfiles:loadedJobProfiles
   }
 })

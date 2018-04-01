@@ -5,6 +5,7 @@
     <app-users></app-users>
     <app-tags></app-tags>
     <app-questions></app-questions>
+    <app-job-profile></app-job-profile>
   </v-container>
 </template>
 
