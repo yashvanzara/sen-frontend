@@ -6,6 +6,8 @@ import loadedCompanies from './company/index'
 import loadedTags from './tags/index'
 import loadedQuestions from './question/index'
 import loadedJobProfiles from './jobprofile/index'
+import CompanyQuestions from './companyquestion/index'
+import loadedPlacementSeasons from './placementseason'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -15,6 +17,8 @@ export const store = new Vuex.Store({
     companies:loadedCompanies,
     tags:loadedTags,
     questions:loadedQuestions,
-    jobProfiles:loadedJobProfiles
+    jobProfiles:loadedJobProfiles,
+    companyquestions:CompanyQuestions,
+    placementseason:loadedPlacementSeasons
   }
 })

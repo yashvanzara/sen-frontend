@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      <v-dialog v-model="dialog" max-width="400px">
+      <v-dialog v-model="dialog" max-width="500px">
         <v-btn color="primary" dark slot="activator" class="mb-2">Add Student</v-btn>
 
         <v-card>
@@ -60,12 +60,15 @@
                   <v-select
                     v-bind:items="genders"
                     v-model="editedItem.user_Gender"
+                    item-value="gender_id"
+                    item-text="gender_desc"
                     label="Gender"
                     single-line
                   ></v-select>
                   <v-select
+                    :value="editedItem.user_ProgramId"
                     v-bind:items="loadedPrograms"
-                    item-value="program_id"
+                    item-value="program_Id"
                     item-text="program_Name"
                     v-model="editedItem.user_ProgramId"
                     label="Program"
@@ -121,7 +124,9 @@
           <td>{{ props.item.user_StudentId }}</td>
           <td>{{ props.item.user_FirstName }}</td>
           <td>{{ props.item.user_LastName }}</td>
+          <td>{{ props.item.user_Gender }}</td>
           <td>{{ getProgramNameFromId(props.item.user_ProgramId) }}</td>
+          <td>{{ props.item.user_IsPlaced===1?'Yes':'No' }}</td>
           <td class="text-xs-right">{{ props.item.user_IsActive===1 }}</td>
           <td class="justify-center layout px-0">
             <v-btn icon class="mx-0" @click="editItem(props.item)">
@@ -154,7 +159,10 @@
         snackText:'Changes Saved Successfully',
         dialog: false,
         editedIndex: -1,
-        genders: ['Male', 'Female'],
+        genders: [
+          {gender_id:'M', gender_desc:'Male'},
+          {gender_id:'F', gender_desc:'Female'}
+        ],
         //Data Table items
 
         search:'',
@@ -227,6 +235,7 @@
       editItem(item) {
         this.editedIndex = this.loadedUsers.indexOf(item)
         this.editedItem = Object.assign({}, item)
+        console.log(typeof this.editedItem.user_ProgramId)
         this.dialog = true
       },
       deleteItem(item) {
@@ -239,9 +248,7 @@
       saveUser() {
         this.snackbar=true
         this.color = 'green'
-        var prog_id = this.editedItem.user_ProgramId.program_Id
-        this.editedItem.user_ProgramId=null;
-        this.editedItem.user_ProgramId = prog_id
+
         if (this.editedIndex > -1) {
           //Manually get the program id from the program object and assign it to updating object
 

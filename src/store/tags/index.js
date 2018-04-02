@@ -33,12 +33,6 @@ export default {
     loadTags({commit, getters}){
       axios.get(BASE_URL + MODEL_URL)
         .then(response => {
-          for(var i=0; i<response.data.length; ++i){
-            const ob = response.data[i];
-            for(var c in ob){
-              console.log(c + ":" + ob[c])
-            }
-          }
           commit('setLoadedTags', response.data)
         })
         .catch(error => {

@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-dialog v-model="dialog" max-width="850px">
-      <v-btn color="primary" dark slot="activator" class="mb-2">Add Questions asked</v-btn>
+    <v-dialog v-model="dialog" max-width="350px">
+      <v-btn color="primary" dark slot="activator" class="mb-2">Add Placement Season</v-btn>
       <v-card>
         <v-card-title>
           <span class="headline">{{formTitle}}</span>
@@ -11,7 +11,7 @@
           <v-container>
             <v-layout row wrap>
               <v-flex>
-                <v-text-field v-model="editedItem.question_Title" label="Question Title"></v-text-field>
+                <v-text-field v-model="editedItem.placementSeason_Year" label="Placement Season"></v-text-field>
               </v-flex>
             </v-layout>
 
@@ -37,12 +37,12 @@
     <v-data-table
       loading="true"
       class="elevation-1"
-      :items="loadedCompanies"
+      :items="loadedPlacementSeasons"
       :headers="headers"
       :search="search">
       <template slot="items" slot-scope="props">
-        <td>{{ companyObject(props.item.company_Id).company_Name }}</td>
-        <td>{{ questionCount(props.item.company_Id) }}</td>
+        <td>{{ props.item.placementSeason_Id }}</td>
+        <td>{{ props.item.placementSeason_Year }}</td>
         <td class="right mr-5 justify-center layout px-0">
           <v-btn icon class="mx-0" @click="editItem(props.item)">
             <v-icon color="teal">edit</v-icon>
@@ -59,19 +59,16 @@
   </v-container>
 </template>
 <script>
-  import CompanyQuestionsModel from '../../models/companyquestion'
+  import PlacementSeasonModel from '../../models/placementseason'
 
   export default {
     data() {
       return {
+        dialog: false,
         editedIndex: -1,
         search: "",
-        dialog: false,
-        headers: CompanyQuestionsModel.headers,
-        editedItem: {
-          companyQuestion_CompanyId: "",
-          companyQuestion_QuestionId: ""
-        }
+        headers: PlacementSeasonModel.headers,
+        editedItem: PlacementSeasonModel.default_object,
       }
     },
     watch: {
@@ -81,27 +78,32 @@
     },
     computed: {
       formTitle() {
-        return this.editedIndex === -1 ? 'Add Question' : 'Edit Questions'
+        return this.editedIndex === -1 ? 'Add Placement Season' : 'Edit Placement Season'
       },
-      loadedCompanyQuestions() {
-        return this.$store.getters.loadedCompanyQuestions
-      },
-      loadedCompanies() {
-        return this.$store.getters.loadedCompanies
+      loadedPlacementSeasons() {
+        return this.$store.getters.loadedPlacementSeasons
       }
     },
     methods: {
-      companyObject(id) {
-        var company = this.$store.getters.loadedCompanies.find(company => {
-          return company.company_Id === id
-        })
-        return company
+      editItem(item) {
+        this.editedIndex = this.loadedPlacementSeasons.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialog = true
       },
-      questionCount(id) {
-        var questions = this.loadedCompanyQuestions.filter(companyquestion => {
-          return companyquestion.companyQuestion_CompanyId === id
-        })
-        return questions.length
+      deleteItem(item) {
+        const index = this.loadedPlacementSeasons.indexOf(item)
+        var cnfm = confirm('Are you sure you want to delete this item?')
+        if (cnfm === true) {
+          this.$store.dispatch('deletePlacementSeason', this.loadedPlacementSeasons[index])
+        }
+      },
+      save() {
+        if (this.editedIndex > -1) {
+          this.$store.dispatch('updatePlacementSeason', this.editedItem)
+        } else {
+          this.$store.dispatch('createPlacementSeason', this.editedItem)
+        }
+        this.close()
       },
       close() {
         this.dialog = false
@@ -110,23 +112,11 @@
           this.editedIndex = -1
         }, 300)
       },
-      editItem(item) {
-        this.editedIndex = this.loadedCompanies.indexOf(item)
-        console.log(item.company_CEO)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-      deleteItem(item){
-        const index = this.loadedTags.indexOf(item)
-        var cnfm = confirm('Are you sure you want to delete this item?')
-        if (cnfm === true) {
-          this.$store.dispatch('deleteTag', this.loadedTags[index])
-        }
-      },
     },
     created() {
-      this.$store.dispatch('loadCompanyQuestions')
-      this.items = this.$store.getters.loadedCompanyQuestions
+      this.$store.dispatch('loadPlacementSeasons')
+      this.items = this.$store.getters.loadedPlacementSeasons
     }
   }
 </script>
+

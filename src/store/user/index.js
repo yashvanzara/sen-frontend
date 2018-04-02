@@ -75,7 +75,6 @@ export default {
     loadUsers({commit, getters}){
       axios.get(BASE_URL + MODEL_URL)
         .then(response => {
-          console.log(response.data)
           commit('setLoadedUsers', response.data)
         })
         .catch(error => {

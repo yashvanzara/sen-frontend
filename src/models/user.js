@@ -29,8 +29,11 @@ export default {
     {text: 'Student ID', align:'left', value:'user_StudentId'},
     { text: 'First Name', align: 'left', sortable: true, value: 'user_FirstName' },
     {text: 'Last Name', align:'left', sortable:true, value:'user_LastName'},
+    {text: 'Gender', align:'left', sortable:true, value:'user_Gender'},
     {text: 'Program', sortable:true, value:'user_ProgramId', align:'left'},
+    {text: 'Placed', align:'left', sortable:true, value:'user_IsPlaced'},
     { text: 'Active', value: 'user_IsActive' }
+
 
   ]
 };

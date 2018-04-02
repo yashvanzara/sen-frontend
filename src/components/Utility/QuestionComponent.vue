@@ -198,7 +198,7 @@
           return user.user_StudentId === this.editedItem.question_CreatorUserId;
         })
         return user
-      },
+      }
     },
     created() {
       this.$store.dispatch('loadQuestions');

@@ -15,6 +15,10 @@ import UserComponent from './components/Utility/UserComponent'
 import TagsComponent from './components/Utility/TagsComponent'
 import QuestionComponent from './components/Utility/QuestionComponent'
 import JobProfileComponent from './components/Utility/JobProfile'
+import PlacementSeasonComponent from './components/Utility/PlacementSeasonComponent'
+
+
+import CompanyQuestionComponent from './components/Utility/CompanyQuestions'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
@@ -36,6 +40,10 @@ Vue.component('app-users', UserComponent)
 Vue.component('app-tags', TagsComponent)
 Vue.component('app-questions', QuestionComponent)
 Vue.component('app-job-profile', JobProfileComponent)
+Vue.component('app-placement-season', PlacementSeasonComponent)
+
+
+Vue.component('app-company-questions', CompanyQuestionComponent)
 Vue.config.productionTip = false
 
 

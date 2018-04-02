@@ -136,7 +136,6 @@
         snackText:'Changes Saved Successfully',
         dialog: false,
         editedIndex: -1,
-        dialog: false,
         search:'',
         headers: CompanyModel.headers,
         editedItem: {

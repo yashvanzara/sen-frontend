@@ -6,6 +6,7 @@
     <app-tags></app-tags>
     <app-questions></app-questions>
     <app-job-profile></app-job-profile>
+    <app-placement-season></app-placement-season>
   </v-container>
 </template>
 
