@@ -105,35 +105,17 @@
         </v-alert>
       </v-data-table>
     </v-container>
-    <v-snackbar
-      :timeout="timeout"
-      :top="y === 'top'"
-      :bottom="y === 'bottom'"
-      :right="x === 'right'"
-      :left="x === 'left'"
-      :multi-line="mode === 'multi-line'"
-      :vertical="mode === 'vertical'"
-      v-model="snackbar"
-      :color="color"
-    >
-      {{ snackText }}
-      <v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn>
-    </v-snackbar>
   </div>
 </template>
 
 <script>
   import CompanyModel from '../../models/company'
+  import {EventBus} from "../../Utility/EventBus";
+  import constants from '../../Utility/constants'
+
   export default {
     data(){
       return {
-        snackbar:false,
-        y: 'top',
-        x: null,
-        mode: '',
-        color:'green',
-        timeout: 5000,
-        snackText:'Changes Saved Successfully',
         dialog: false,
         editedIndex: -1,
         search:'',
@@ -159,7 +141,8 @@
           company_Website:"",
           company_Information:"",
           company_IsActive:0,
-        }
+        },
+        bus:EventBus
       }
     },
     watch: {
@@ -196,13 +179,16 @@
         }, 300)
       },
       save() {
-        this.snackbar=true
-        this.color = 'green'
         if (this.editedIndex > -1) {
           this.$store.dispatch('updateCompany', this.editedItem)
           this.items = this.$store.getters.loadedCompanies
         } else {
           this.$store.dispatch('createCompany', this.editedItem)
+          this.bus.$emit('notify-me', {
+            data: {
+              title: constants.COMPANY_CREATED,
+            }
+          })
         }
         this.close()
       },

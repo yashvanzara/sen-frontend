@@ -94,6 +94,7 @@ export default {
       axios.delete(BASE_URL + MODEL_URL + payload.user_StudentId)
         .then(response => {
           commit('deleteUser', payload)
+          console.log(response.data)
         })
         .catch(error => {
           console.log(error)

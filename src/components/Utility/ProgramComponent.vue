@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <v-container>
+  <v-container>
 
     <v-dialog v-model="dialog" max-width="300px">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Program</v-btn>
@@ -35,17 +34,17 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-      <v-layout>
-        <v-flex>
-          <v-text-field
-            append-icon="search"
-            label="Search"
-            single-line
-            hide-details
-            v-model="search"
-          ></v-text-field>
-        </v-flex>
-      </v-layout>
+    <v-layout>
+      <v-flex>
+        <v-text-field
+          append-icon="search"
+          label="Search"
+          single-line
+          hide-details
+          v-model="search"
+        ></v-text-field>
+      </v-flex>
+    </v-layout>
 
     <v-data-table
       loading="true"
@@ -69,23 +68,7 @@
         Your search for "{{ search }}" found no results.
       </v-alert>
     </v-data-table>
-    </v-container>
-
-    <v-snackbar
-      :timeout="timeout"
-      :top="y === 'top'"
-      :bottom="y === 'bottom'"
-      :right="x === 'right'"
-      :left="x === 'left'"
-      :multi-line="mode === 'multi-line'"
-      :vertical="mode === 'vertical'"
-      v-model="snackbar"
-      :color="color"
-    >
-      {{ snackText }}
-      <v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn>
-    </v-snackbar>
-  </div>
+  </v-container>
 </template>
 <style>
 
@@ -96,19 +79,11 @@
   export default {
     data() {
       return {
-        // Snackbar related items
-        snackbar:false,
-        y: 'top',
-        x: null,
-        mode: '',
-        color:'green',
-        timeout: 5000,
-        snackText:'Changes Saved Successfully',
         dialog: false,
         editedIndex: -1,
 
         //Data Table items
-        search:'',
+        search: '',
         headers: ProgramModel.headers,
         editedItem: {
           program_Name: "",
@@ -147,8 +122,6 @@
         }
       },
       save() {
-        this.snackbar=true
-        this.color = 'green'
         if (this.editedIndex > -1) {
           console.log(this.editedItem)
           this.$store.dispatch('updateProgram', this.editedItem)

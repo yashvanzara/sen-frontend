@@ -61,7 +61,7 @@
             </v-flex>
           </v-layout>
           <!--End of Gender and Date of Birth-->
-          <v-text-field required type="email" v-model="user.user_EmailId" label="Email"></v-text-field>
+          <v-text-field required type="email" :rules="constants.RULES.email" v-model="user.user_EmailId" label="Email"></v-text-field>
           <v-text-field required type="password"v-model="user.user_Password" label="Password"></v-text-field>
           <v-text-field required type="phone" v-model="user.user_ContactNo" label="Phone"
                         hint="Notifications will communicated on this number"></v-text-field>
@@ -97,6 +97,17 @@
 
           <v-layout row wrap>
             <v-flex  lg4 xs8 s8>
+              <v-text-field label="SSC Year" v-model="user.user_SscYear"></v-text-field>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-flex lg4 xs3 sm3>
+              <v-text-field label="HSC Year" v-model="user.user_HscYear"></v-text-field>
+            </v-flex>
+          </v-layout>
+
+
+          <v-layout row wrap>
+            <v-flex  lg4 xs8 s8>
               <v-text-field label="Qualifying Degree" v-model="user.user_QualifyingDegree"></v-text-field>
             </v-flex>
             <v-spacer></v-spacer>
@@ -113,15 +124,17 @@
 </template>
 
 <script>
+  import constants from '../../Utility/constants'
   export default {
     data() {
       return {
+        constants:constants,
         program: {id: '1', program_Name: 'Master of Science in Inforrmation Technology'},
         genders: ['Male', 'Female'],
         date: null,
         menu: false,
         user:{
-          user_StudentId:2017,
+          user_StudentId:"",
           user_TypeFlag:2,
           user_FirstName:"",
           user_MiddleName:"",
@@ -135,8 +148,8 @@
           user_AddressCurrent:"",
           user_ProgramId:1,
           user_JoinDate:new Date(),
-          user_SscYear:2012,
-          user_HscYear:2014,
+          user_SscYear:"",
+          user_HscYear:"",
           user_QualifyingBoard:"",
           user_QualifyingPercentage:"",
           user_QualifyingDegree:"",
@@ -163,7 +176,9 @@
     },
     methods: {
       addUser(){
-        this.$store.dispatch('createUser', this.user);
+        this.$store.dispatch('createUser', this.user)
+          .then(this.$router.push('/login'))
+
       },
       save (date) {
         this.$refs.menu.save(date)

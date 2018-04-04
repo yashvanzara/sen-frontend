@@ -1,5 +1,21 @@
 <template>
   <v-app>
+    <!--Notification Card-->
+    <notify-me
+      event-show="notify-me"
+      container="notification"
+      width="300"
+      :timeout=4000
+      :event-bus="bus"
+    >
+      <template slot="content" slot-scope="{data}">
+        <v-card dark v-bind:style="{ backgroundColor: data.status}">
+          <v-card-title>{{data.title}}</v-card-title>
+        </v-card>
+      </template>
+    </notify-me>
+
+
     <v-navigation-drawer absolute temporary v-model="sideNav">
       <!--Navigation Drawer, visible only on xs devices-->
       <v-list>
@@ -47,11 +63,14 @@
 </template>
 
 <script>
+  import {EventBus} from "./Utility/EventBus";
+
   export default {
     data() {
       return {
         title: 'Placement Portal',
         sideNav: false,
+        bus: EventBus,
       }
     },
     computed: {
@@ -61,13 +80,19 @@
           {link: '/studentregister', icon: 'account_circle', name: 'Reigster'},
           {link: '/login', icon: 'exit_to_app', name: 'Login'},
           {link: '/home', icon: 'dashboard', name: 'Dashboard'},
-          {link: '/profile', icon: 'face', name: 'Profile'}
+          {link: '/profile', icon: 'face', name: 'Profile'},
+          {link: '/jobopenings/new', icon: 'work', name: 'Add Job Opening'}
         ]
         return menuItems
       },
       userIsAuthenticated() {
         //return this.$store.getters.user !== null && this.$store.getters.user !== undefined
         return this.logged
+      },
+      mounted() {
+        this.bus.$on('notify-me', data => {
+
+        });
       }
     }
   }
@@ -77,7 +102,9 @@
   .fade-enter-active, .fade-leave-active {
     transition: opacity .25s;
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+  {
     opacity: 0;
   }
 </style>

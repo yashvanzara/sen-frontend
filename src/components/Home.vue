@@ -7,15 +7,22 @@
     <app-questions></app-questions>
     <app-job-profile></app-job-profile>
     <app-placement-season></app-placement-season>
+    <app-add-job-opening></app-add-job-opening>
+
+
   </v-container>
 </template>
 
 <script>
+
+  import {EventBus} from "../Utility/EventBus";
+
+
   export default {
     data() {
       return {
 
-        }
       }
+    }
   }
 </script>

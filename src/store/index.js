@@ -8,6 +8,7 @@ import loadedQuestions from './question/index'
 import loadedJobProfiles from './jobprofile/index'
 import CompanyQuestions from './companyquestion/index'
 import loadedPlacementSeasons from './placementseason'
+import loadedJobOpenings from './jobopening'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -19,6 +20,7 @@ export const store = new Vuex.Store({
     questions:loadedQuestions,
     jobProfiles:loadedJobProfiles,
     companyquestions:CompanyQuestions,
-    placementseason:loadedPlacementSeasons
+    placementseason:loadedPlacementSeasons,
+    jobopenings:loadedJobOpenings
   }
 })

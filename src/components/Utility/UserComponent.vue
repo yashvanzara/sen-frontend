@@ -132,9 +132,6 @@
             <v-btn icon class="mx-0" @click="editItem(props.item)">
               <v-icon color="teal">edit</v-icon>
             </v-btn>
-            <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-              <v-icon color="pink">delete</v-icon>
-            </v-btn>
           </td>
         </template>
         <v-alert slot="no-results" :value="true" color="error" icon="warning">
@@ -150,13 +147,6 @@
   export default {
     data(){
       return {
-        snackbar:false,
-        y: 'top',
-        x: null,
-        mode: '',
-        color:'green',
-        timeout: 5000,
-        snackText:'Changes Saved Successfully',
         dialog: false,
         editedIndex: -1,
         genders: [
@@ -246,9 +236,6 @@
         }
       },
       saveUser() {
-        this.snackbar=true
-        this.color = 'green'
-
         if (this.editedIndex > -1) {
           //Manually get the program id from the program object and assign it to updating object
 
