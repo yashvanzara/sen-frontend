@@ -9,11 +9,11 @@ import CompanyComponent from '../components/Utility/CompanyComponent'
 import UserComponent from '../components/Utility/UserComponent'
 import QuestionTagsComponent from '../components/Utility/TagsComponent'
 import QuestionComponent from '../components/Utility/QuestionComponent'
-import JobProfileComponent from '../components/Utility/JobProfile'
+import JobProfileComponent from '../components/Utility/JobProfileComponent'
 import PlacementSeasonComponent from '../components/Utility/PlacementSeasonComponent'
 import ListJobOpenings from '../components/Placement/ListJobOpenings'
+import PlacementPolicyComponent from '../components/Utility/PlacementPolicyComponent'
 Vue.use(Router)
-
 export default new Router({
   routes: [
     {
@@ -75,7 +75,12 @@ export default new Router({
       path:'/manage/placementseasons/',
       name:'ManagePlacementSeasons',
       component:PlacementSeasonComponent
+    },
+    {
+      path:'/manage/placementpolicies/',
+      name:'ManagePlacementPolicies',
+      component:PlacementPolicyComponent
     }
   ],
-  mode:'history'
+  mode:'history',
 })

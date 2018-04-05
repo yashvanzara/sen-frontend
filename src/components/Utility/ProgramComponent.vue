@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container mt-0>
 
     <v-dialog v-model="dialog" max-width="300px">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Program</v-btn>
@@ -139,7 +139,7 @@
       },
     },
     created() {
-      this.$store.dispatch('loadPrograms')
+
       this.items = this.$store.getters.loadedPrograms
     }
   }

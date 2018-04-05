@@ -25,7 +25,30 @@
           </v-list-tile-action>
           <v-list-tile-content>{{menuItem.name}}</v-list-tile-content>
         </v-list-tile>
+        <template v-if="userIsPlacementCellMember">
+          <v-divider></v-divider>
+          <v-list-tile>
+            <v-list-tile-content>Manage</v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile v-for="manageItem in manageItems" :key="manageItem.name" :to="manageItem.link">
+            <v-list-tile-action>
+              <v-icon dark>{{manageItem.icon}}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>{{manageItem.name}}</v-list-tile-content>
+          </v-list-tile>
+        </template>
+        <v-divider></v-divider>
+        <v-list-tile
+          v-if="userIsAuthenticated"
+          @click="signOut">
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>Logout</v-list-tile-content>
+        </v-list-tile>
+
       </v-list>
+
 
     </v-navigation-drawer>
 
@@ -51,6 +74,24 @@
           <v-icon left dark>{{ item.icon }}</v-icon>
           {{ item.name }}
         </v-btn>
+        <v-menu offset-y v-if="userIsPlacementCellMember">
+          <v-btn primary flat color="white" slot="activator">
+            <v-icon left dark right>settings</v-icon>
+            Manage
+          </v-btn>
+          <v-list>
+            <v-list-tile v-for="item in manageItems" :key="item.name" :to="item.link">
+              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+        <v-btn
+          v-if="userIsAuthenticated"
+          flat
+          @click="signOut">
+          <v-icon left dark>exit_to_app</v-icon>
+          Logout
+        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <main>
@@ -75,25 +116,51 @@
     },
     computed: {
       menuItems() {
-        /*Dynamically generate menuitems based on user login status*/
-        let menuItems = [
-          {link: '/studentregister', icon: 'account_circle', name: 'Reigster'},
-          {link: '/login', icon: 'exit_to_app', name: 'Login'},
-          {link: '/home', icon: 'dashboard', name: 'Dashboard'},
-          {link: '/profile', icon: 'face', name: 'Profile'},
-          {link: '/jobopenings/new', icon: 'work', name: 'Add Job Opening'}
-        ]
+        let menuItems;
+        if (this.userIsAuthenticated) {
+          menuItems = [
+            {link: '/profile', icon: 'face', name: 'Profile'},
+            {link: '/jobopenings/new', icon: 'work', name: 'Add Job Opening'}
+          ]
+        } else {
+          menuItems = [
+            {link: '/studentregister', icon: 'account_circle', name: 'Reigster'},
+            {link: '/login', icon: 'lock_open', name: 'Login'},
+          ]
+        }
+
         return menuItems
       },
-      userIsAuthenticated() {
-        //return this.$store.getters.user !== null && this.$store.getters.user !== undefined
-        return this.logged
+      manageItems() {
+        let manageItems = [
+          {link: '/manage/companies/', icon: 'domain', name: 'Companies'},
+          {link: '/manage/jobprofiles/', icon: 'folder_shared', name: 'Job Profiles'},
+          {link: '/manage/placementseasons/', icon: 'plus_one', name: 'Placement Seasons'},
+          {link: '/manage/programs/', icon: 'school', name: 'Programs'},
+          {link: '/manage/placementpolicies/', icon: 'school', name: 'Placement Policies'},
+          {link: '/manage/questions/', icon: 'folder', name: 'Questions'},
+          {link: '/manage/tags/', icon: 'label', name: 'Tags'},
+          {link: '/manage/users/', icon: 'supervisor_account', name: 'Users'}
+        ]
+        return manageItems
       },
-      mounted() {
-        this.bus.$on('notify-me', data => {
-
-        });
+      userIsAuthenticated() {
+        return this.$store.getters.isLoggedIn
+      },
+      userIsPlacementCellMember() {
+        return true
+        //TODO: Update from vuex for actual user
       }
+    },
+    methods: {
+      signOut() {
+        this.$store.dispatch('signOut')
+      }
+    },
+    mounted() {
+      this.bus.$on('notify-me', data => {
+
+      });
     }
   }
 </script>

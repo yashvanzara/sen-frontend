@@ -14,13 +14,13 @@ import CompanyComponent from './components/Utility/CompanyComponent'
 import UserComponent from './components/Utility/UserComponent'
 import TagsComponent from './components/Utility/TagsComponent'
 import QuestionComponent from './components/Utility/QuestionComponent'
-import JobProfileComponent from './components/Utility/JobProfile'
+import JobProfileComponent from './components/Utility/JobProfileComponent'
 import PlacementSeasonComponent from './components/Utility/PlacementSeasonComponent'
 import AddJobOpeningComponent from './components/Placement/AddJobOpening'
 import ListJobOpeningsComponent from './components/Placement/ListJobOpenings'
+import PlacementPolicyComponent from './components/Utility/PlacementPolicyComponent'
 
-
-import CompanyQuestionComponent from './components/Utility/CompanyQuestions'
+import CompanyQuestionComponent from './components/Utility/CompanyQuestionsComponent'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import Notify from 'vue-notify-me'
@@ -45,6 +45,7 @@ Vue.component('app-job-profile', JobProfileComponent)
 Vue.component('app-placement-season', PlacementSeasonComponent)
 Vue.component('app-add-job-opening', AddJobOpeningComponent)
 Vue.component('app-list-job-openings', ListJobOpeningsComponent)
+Vue.component('app-placement-policy', PlacementPolicyComponent)
 Vue.component('notify-me', Notify)
 
 
@@ -63,5 +64,11 @@ new Vue({
     this.$store.dispatch('loadJobProfiles')
     this.$store.dispatch('loadPlacementSeasons')
     this.$store.dispatch('loadPrograms')
+    this.$store.dispatch('loadCompanyQuestions')
+    this.$store.dispatch('loadPlacementSeasons')
+    this.$store.dispatch('loadQuestions')
+    this.$store.dispatch('loadUsers')
+    this.$store.dispatch('loadTags')
+    this.$store.dispatch('loadPlacementPolicies')
   }
 })

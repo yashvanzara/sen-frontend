@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container mt-0>
     <v-dialog v-model="dialog" max-width="350px">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Category</v-btn>
       <v-card>
@@ -117,7 +117,7 @@
       },
     },
     created() {
-      this.$store.dispatch('loadTags')
+
       this.items = this.$store.getters.loadedTags
     }
   }

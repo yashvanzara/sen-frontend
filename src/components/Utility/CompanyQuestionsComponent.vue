@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container mt-0>
     <v-dialog v-model="dialog" max-width="850px">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Questions asked</v-btn>
       <v-card>
@@ -125,7 +125,7 @@
       },
     },
     created() {
-      this.$store.dispatch('loadCompanyQuestions')
+
       this.items = this.$store.getters.loadedCompanyQuestions
     }
   }

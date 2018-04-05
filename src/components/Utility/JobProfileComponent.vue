@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <v-container>
+    <v-container mt-0>
 
       <v-dialog v-model="dialog" max-width="300px">
         <v-btn color="primary" dark slot="activator" class="mb-2">Add Job Profile</v-btn>
@@ -59,22 +58,6 @@
         </v-alert>
       </v-data-table>
     </v-container>
-
-    <v-snackbar
-      :timeout="timeout"
-      :top="y === 'top'"
-      :bottom="y === 'bottom'"
-      :right="x === 'right'"
-      :left="x === 'left'"
-      :multi-line="mode === 'multi-line'"
-      :vertical="mode === 'vertical'"
-      v-model="snackbar"
-      :color="color"
-    >
-      {{ snackText }}
-      <v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn>
-    </v-snackbar>
-  </div>
 </template>
 <style>
 
@@ -85,17 +68,8 @@
   export default {
     data() {
       return {
-        // Snackbar related items
-        snackbar:false,
-        y: 'top',
-        x: null,
-        mode: '',
-        color:'green',
-        timeout: 5000,
-        snackText:'Changes Saved Successfully',
         dialog: false,
         editedIndex: -1,
-
         //Data Table items
         search:'',
         headers: JobProfileModel.headers,
@@ -153,7 +127,7 @@
       },
     },
     created() {
-      this.$store.dispatch('loadJobProfiles')
+
       this.items = this.$store.getters.loadedJobProfiles
     }
   }

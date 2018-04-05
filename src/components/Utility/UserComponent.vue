@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <v-container>
+    <v-container mt-0>
       <v-dialog v-model="dialog" max-width="500px">
         <v-btn color="primary" dark slot="activator" class="mb-2">Add Student</v-btn>
 
@@ -139,9 +138,7 @@
         </v-alert>
       </v-data-table>
     </v-container>
-  </div>
 </template>
-
 <script>
   import UserModel from '../../models/user'
   export default {
@@ -258,7 +255,7 @@
       },
     },
     created(){
-      this.$store.dispatch('loadUsers');
+
       this.items = this.$store.getters.loadedUsers
     }
   }

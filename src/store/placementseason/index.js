@@ -67,7 +67,7 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    }
+    },
   },
   getters: {
     loadedPlacementSeasons(state){

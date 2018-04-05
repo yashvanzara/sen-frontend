@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container mt-0>
     <v-dialog v-model="dialog" max-width="350px">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Placement Season</v-btn>
       <v-card>
@@ -114,7 +114,7 @@
       },
     },
     created() {
-      this.$store.dispatch('loadPlacementSeasons')
+
       this.items = this.$store.getters.loadedPlacementSeasons
     }
   }

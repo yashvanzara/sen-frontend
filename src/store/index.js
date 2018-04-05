@@ -9,6 +9,8 @@ import loadedJobProfiles from './jobprofile/index'
 import CompanyQuestions from './companyquestion/index'
 import loadedPlacementSeasons from './placementseason'
 import loadedJobOpenings from './jobopening'
+import Auth from './auth'
+import loadedPlacementPolicies from './placementpolicy'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -21,6 +23,8 @@ export const store = new Vuex.Store({
     jobProfiles:loadedJobProfiles,
     companyquestions:CompanyQuestions,
     placementseason:loadedPlacementSeasons,
-    jobopenings:loadedJobOpenings
+    jobopenings:loadedJobOpenings,
+    auth:Auth,
+    placementpolicies:loadedPlacementPolicies
   }
 })
