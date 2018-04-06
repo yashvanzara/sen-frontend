@@ -124,7 +124,7 @@
           ]
         } else {
           menuItems = [
-            {link: '/studentregister', icon: 'account_circle', name: 'Reigster'},
+            {link: '/studentregister', icon: 'account_circle', name: 'Student Registration'},
             {link: '/login', icon: 'lock_open', name: 'Login'},
           ]
         }
@@ -154,12 +154,12 @@
     },
     methods: {
       signOut() {
+        this.$router.push('/')
         this.$store.dispatch('signOut')
       }
     },
     mounted() {
       this.bus.$on('notify-me', data => {
-
       });
     }
   }

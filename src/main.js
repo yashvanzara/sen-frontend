@@ -19,6 +19,9 @@ import PlacementSeasonComponent from './components/Utility/PlacementSeasonCompon
 import AddJobOpeningComponent from './components/Placement/AddJobOpening'
 import ListJobOpeningsComponent from './components/Placement/ListJobOpenings'
 import PlacementPolicyComponent from './components/Utility/PlacementPolicyComponent'
+import AreasOfInterestComponent from './components/User/AreaOfInterestComponent'
+import UserProfileComponent from './components/User/UserProfileComponent'
+
 
 import CompanyQuestionComponent from './components/Utility/CompanyQuestionsComponent'
 import mavonEditor from 'mavon-editor'
@@ -46,6 +49,8 @@ Vue.component('app-placement-season', PlacementSeasonComponent)
 Vue.component('app-add-job-opening', AddJobOpeningComponent)
 Vue.component('app-list-job-openings', ListJobOpeningsComponent)
 Vue.component('app-placement-policy', PlacementPolicyComponent)
+Vue.component('app-areas-of-interest', AreasOfInterestComponent)
+Vue.component('app-user-profile-component', UserProfileComponent)
 Vue.component('notify-me', Notify)
 
 

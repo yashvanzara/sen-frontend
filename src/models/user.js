@@ -33,7 +33,5 @@ export default {
     {text: 'Program', sortable:true, value:'user_ProgramId', align:'left'},
     {text: 'Placed', align:'left', sortable:true, value:'user_IsPlaced'},
     { text: 'Active', value: 'user_IsActive' }
-
-
   ]
 };

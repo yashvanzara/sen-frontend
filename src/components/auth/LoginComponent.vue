@@ -10,14 +10,14 @@
               label="Student ID"
               required
               :rules="[constants.RULES.required]"
-              v-model="username"
+              v-model="user_StudentId"
             >
             </v-text-field>
             <v-text-field
               required
               :rules="[constants.RULES.required]"
               type="password"
-              v-model="password"
+              v-model="user_Password"
               label="Password">
             </v-text-field>
           </v-form>
@@ -30,19 +30,25 @@
 </template>
 
 <script>
-  import {EventBus} from "../../Utility/EventBus";
   import constants from '../../Utility/constants'
+
   export default {
     data() {
       return {
-        constants:constants,
-        username: "",
-        password: ""
+        constants: constants,
+        user_StudentId: "",
+        user_Password: ""
       }
     },
     methods: {
       signIn() {
-        this.$store.dispatch('signIn', {username:this.username, password:this.password})
+        this.$store.dispatch('signIn', {user_StudentId: this.user_StudentId, user_Password: this.user_Password})
+          .then(() => {
+            console.log(this.$store.getters.isLoggedIn)
+            if (this.$store.getters.isLoggedIn === true) {
+              this.$router.push('/profile')
+            }
+          })
       }
     }
   }

@@ -13,6 +13,8 @@ import JobProfileComponent from '../components/Utility/JobProfileComponent'
 import PlacementSeasonComponent from '../components/Utility/PlacementSeasonComponent'
 import ListJobOpenings from '../components/Placement/ListJobOpenings'
 import PlacementPolicyComponent from '../components/Utility/PlacementPolicyComponent'
+import ProfileHolderComponent from '../components/User/ProfileHolderComponent'
+import AuthGuard from './auth-guard'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -80,6 +82,12 @@ export default new Router({
       path:'/manage/placementpolicies/',
       name:'ManagePlacementPolicies',
       component:PlacementPolicyComponent
+    },
+    {
+      path:'/profile',
+      name:'ProfileHolder',
+      component:ProfileHolderComponent,
+      beforeEnter:AuthGuard
     }
   ],
   mode:'history',
