@@ -1,5 +1,6 @@
 import axios from 'axios'
-const BASE_URL = 'http://localhost:3000'
+import constants from '../../Utility/constants'
+const BASE_URL = constants.BASE_URL
 const MODEL_URL = '/alltags/'
 export default {
   state:{

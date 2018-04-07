@@ -92,13 +92,13 @@
 <script>
   import QuestionModel from '../../models/question'
   //TODO: Handle actual user's id when adding login functionality
-
+  import mavon from '../../Utility/mavon'
   export default {
 
     data() {
       return {
         loggedUser: {
-          user_StudentId: "201712004"
+          user_StudentId: this.$store.getters.loggedUser.user_StudentId
         },
         dialog: false,
         editedIndex: -1,
@@ -107,38 +107,7 @@
 
         value: "",
         placeholder: "Begin writing...",
-        toolbar: {
-          bold: true,
-          italic: true,
-          header: true,
-          editable: false,
-          underline: true,
-          strikethrough: true,
-          mark: true,
-          superscript: true,
-          subscript: true,
-          quote: true,
-          ol: true,
-          ul: true,
-          link: true,
-          imagelink: true,
-          code: true,
-          table: true,
-          fullscreen: true,
-          readmodel: true,
-          htmlcode: true,
-          /* 1.3.5 */
-          undo: true,
-          redo: true,
-          trash: true,
-          help: true,
-          save: true,
-          alignleft: true,
-          aligncenter: true,
-          alignright: true,
-          subfield: true,
-          preview: true
-        },
+        toolbar: mavon.toolbar_editing,
         editedItem: {
           question_Id: "",
           question_Title: "",

@@ -50,19 +50,13 @@
         </v-layout>
         <v-layout row wrap>
           <v-flex lg4>
-            <v-switch
-              v-model="updatingObject.user_IsInterested"
-              :label="`Interested in Placements: ${updatingObject.user_IsInterested === '1'?'Yes':'No'}`"
-              true-value=1
-              false-value=0
-            >
-            </v-switch>
+            <v-switch :label="`Interested in Placements: ${updatingObject.user_IsInterested === 1?'Yes':'No'}`" v-model="updatingObject.user_IsInterested" :true-value="1" :false-value="0"></v-switch>
           </v-flex>
         </v-layout>
 
       </template>
       <template v-if="disabled">
-        
+
       </template>
     </v-form>
   </v-container>

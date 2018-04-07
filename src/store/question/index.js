@@ -1,6 +1,6 @@
 import axios from 'axios'
-
-const BASE_URL = 'http://localhost:3000'
+import constants from '../../Utility/constants'
+const BASE_URL = constants.BASE_URL
 const MODEL_URL = '/question/'
 export default {
   state: {
@@ -37,12 +37,15 @@ export default {
           commit('setLoadedQuestions', response.data);
         })
         .catch(error => {
-          console.log(error)
+          console.log(error.data)
         })
     },
-    createQuestion({commit, getters, dispatch}, payload) {
+    createQuestion({commit, getters, dispatch}, payload, tagsPayload) {
       for (var c in payload) {
         console.log(c + ":" + payload[c])
+      }
+      if(tagsPayload!==null && tagsPayload!==undefined&&tagsPayload.length>0){
+        dispatch('addQuestionTags', tagsPayload)
       }
       axios.post(BASE_URL + MODEL_URL, payload)
         .then(response => {
@@ -59,7 +62,7 @@ export default {
           commit('deleteQuestion', payload)
         })
         .catch(error => {
-          console.log(error)
+          console.log(error.data)
         })
     },
     updateQuestion({commit, getters}, payload) {
@@ -71,7 +74,7 @@ export default {
           commit('updateQuestion', payload)
         })
         .catch(error => {
-          console.log(error)
+          console.log(error.response.data)
         })
     }
   },

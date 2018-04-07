@@ -37,7 +37,22 @@
             <v-list-tile-content>{{manageItem.name}}</v-list-tile-content>
           </v-list-tile>
         </template>
+
+        <template v-if="userIsAuthenticated">
+          <v-divider></v-divider>
+          <v-list-tile>
+            <v-list-tile-content>Training</v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile v-for="item in trainingItems" :key="item.name" :to="item.link">
+            <v-list-tile-action>
+              <v-icon dark>{{item.icon}}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>{{item.name}}</v-list-tile-content>
+          </v-list-tile>
+        </template>
+
         <v-divider></v-divider>
+
         <v-list-tile
           v-if="userIsAuthenticated"
           @click="signOut">
@@ -74,6 +89,7 @@
           <v-icon left dark>{{ item.icon }}</v-icon>
           {{ item.name }}
         </v-btn>
+
         <v-menu offset-y v-if="userIsPlacementCellMember">
           <v-btn primary flat color="white" slot="activator">
             <v-icon left dark right>settings</v-icon>
@@ -85,6 +101,19 @@
             </v-list-tile>
           </v-list>
         </v-menu>
+
+        <v-menu offset-y v-if="userIsAuthenticated">
+          <v-btn primary flat color="white" slot="activator">
+            <v-icon left dark right>chrome_reader_mode</v-icon>
+            Training
+          </v-btn>
+          <v-list>
+            <v-list-tile v-for="item in trainingItems" :key="item.name" :to="item.link">
+              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+
         <v-btn
           v-if="userIsAuthenticated"
           flat
@@ -130,6 +159,15 @@
         }
 
         return menuItems
+      },
+      trainingItems(){
+        let trainingItems = [
+          {link: '/training/addexperience/', icon: 'domain', name: 'Add interview experience'},
+          {link: '/training/addquestion/', icon: 'domain', name: 'Add interview questions'},
+          {link: '/practice/category', icon: 'domain', name: 'Practice questions'},
+          {link: '/practice/company', icon: 'domain', name: 'Practice Company questions'},
+        ]
+        return trainingItems
       },
       manageItems() {
         let manageItems = [

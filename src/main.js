@@ -21,6 +21,11 @@ import ListJobOpeningsComponent from './components/Placement/ListJobOpenings'
 import PlacementPolicyComponent from './components/Utility/PlacementPolicyComponent'
 import AreasOfInterestComponent from './components/User/AreaOfInterestComponent'
 import UserProfileComponent from './components/User/UserProfileComponent'
+import AddQuestionComponent from './components/Training/AddQuestionComponent'
+import PracticeCompanyWiseComponent from './components/Training/PracticeCompanyWise'
+import PracticeCategoryWiseComponent from './components/Training/PracticeCategoryWise'
+import StarRating from 'vue-star-rating'
+import VueStars from 'vue-stars'
 
 
 import CompanyQuestionComponent from './components/Utility/CompanyQuestionsComponent'
@@ -52,7 +57,11 @@ Vue.component('app-placement-policy', PlacementPolicyComponent)
 Vue.component('app-areas-of-interest', AreasOfInterestComponent)
 Vue.component('app-user-profile-component', UserProfileComponent)
 Vue.component('notify-me', Notify)
-
+Vue.component('star-rating', StarRating)
+Vue.component('app-add-question-component', AddQuestionComponent)
+Vue.component('app-practice-component', PracticeCompanyWiseComponent)
+Vue.component('app-practice-categorywise', PracticeCategoryWiseComponent)
+Vue.component('vue-stars', VueStars)
 
 Vue.component('app-company-questions', CompanyQuestionComponent)
 Vue.config.productionTip = false
@@ -75,5 +84,6 @@ new Vue({
     this.$store.dispatch('loadUsers')
     this.$store.dispatch('loadTags')
     this.$store.dispatch('loadPlacementPolicies')
+    this.$store.dispatch('loadAreaOfInterests')
   }
 })

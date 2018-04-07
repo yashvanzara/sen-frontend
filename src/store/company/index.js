@@ -1,7 +1,7 @@
 import company from "../../models/program";
 import axios from 'axios'
-import CONSTANTS from '../../Utility/constants'
-const BASE_URL = CONSTANTS.BASE_URL
+import constants from '../../Utility/constants'
+const BASE_URL = constants.BASE_URL
 const MODEL_URL = '/company/'
 export default {
   state: {

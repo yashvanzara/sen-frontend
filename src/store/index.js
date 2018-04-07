@@ -11,6 +11,7 @@ import loadedPlacementSeasons from './placementseason'
 import loadedJobOpenings from './jobopening'
 import Auth from './auth'
 import loadedPlacementPolicies from './placementpolicy'
+import loadedAreaOfInterests from './areaofinterest'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -25,6 +26,7 @@ export const store = new Vuex.Store({
     placementseason:loadedPlacementSeasons,
     jobopenings:loadedJobOpenings,
     auth:Auth,
-    placementpolicies:loadedPlacementPolicies
+    placementpolicies:loadedPlacementPolicies,
+    areaofinterst:loadedAreaOfInterests
   }
 })

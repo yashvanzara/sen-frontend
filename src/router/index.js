@@ -14,6 +14,9 @@ import PlacementSeasonComponent from '../components/Utility/PlacementSeasonCompo
 import ListJobOpenings from '../components/Placement/ListJobOpenings'
 import PlacementPolicyComponent from '../components/Utility/PlacementPolicyComponent'
 import ProfileHolderComponent from '../components/User/ProfileHolderComponent'
+import AddQuestionComponent from '../components/Training/AddQuestionComponent'
+import PracticeCompanyComponent from '../components/Training/PracticeCompanyWise'
+import PracticeCategoryComponent from '../components/Training/PracticeCategoryWise'
 import AuthGuard from './auth-guard'
 Vue.use(Router)
 export default new Router({
@@ -88,6 +91,21 @@ export default new Router({
       name:'ProfileHolder',
       component:ProfileHolderComponent,
       beforeEnter:AuthGuard
+    },
+    {
+      path:'/training/addquestion/',
+      name:'AddQuestion',
+      component:AddQuestionComponent
+    },
+    {
+      path:'/practice/company',
+      name:'PracticeCompanySection',
+      component:PracticeCompanyComponent
+    },
+    {
+      path:'/practice/category',
+      name:'PracticeCategorySection',
+      component:PracticeCategoryComponent
     }
   ],
   mode:'history',

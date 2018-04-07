@@ -2,6 +2,7 @@
   <v-container mt-0>
     <h2><v-icon large left>person</v-icon>{{fullName}}</h2>
     <app-user-profile-component></app-user-profile-component>
+    <app-areas-of-interest></app-areas-of-interest>
   </v-container>
 </template>
 <script>
