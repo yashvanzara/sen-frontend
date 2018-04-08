@@ -80,10 +80,24 @@
     methods: {
       saveQuestion() {
         this.editedItem.question_CreatorUserId = this.$store.getters.loggedUser.user_StudentId
-        this.$store.dispatch('createQuestion', this.editedItem, this.question_tags)
+        let editedData = {
+          ...this.editedItem
+        }
+        var payload = {
+          data:editedData,
+          tags:this.question_tags
+        }
+
+        this.$store.dispatch('createQuestion', payload)
           .then(() => {
-            console.log(this.question_tags)
             this.editedItem = Object.assign({}, QuestionModel.default_object)
+            EventBus.$emit('notify-me', {
+              data:{
+                title:constants.QUESTION_ADDED_FOR_APPROVAL,
+                status:constants.COLOUR_GREEN
+              }
+            })
+            this.$router.push('/training/addquestion/')
           })
       }
     }

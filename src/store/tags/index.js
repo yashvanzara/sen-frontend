@@ -5,6 +5,7 @@ const MODEL_URL = '/alltags/'
 export default {
   state:{
     loadedTags:[
+
     ]
   },
   mutations:{

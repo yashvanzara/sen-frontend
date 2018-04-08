@@ -5,8 +5,7 @@ import 'vuetify/dist/vuetify.css'
 import { store } from './store'
 import App from './App'
 import router from './router'
-import { HalfCircleSpinner } from 'epic-spinners'
-import { FulfillingBouncingCircleSpinner } from 'epic-spinners'
+
 import LoginComponent from './components/auth/LoginComponent'
 import StudentRegisterComponent from './components/auth/StudentRegisterComponent'
 import ProgramComponent from './components/Utility/ProgramComponent'
@@ -24,17 +23,21 @@ import UserProfileComponent from './components/User/UserProfileComponent'
 import AddQuestionComponent from './components/Training/AddQuestionComponent'
 import PracticeCompanyWiseComponent from './components/Training/PracticeCompanyWise'
 import PracticeCategoryWiseComponent from './components/Training/PracticeCategoryWise'
+import StudentDashboardComponent from './components/Dashboard/StudentDashboard'
+import PlacementCellDashboardComponent from './components/Dashboard/SPCDashboard'
+import PlacedVsInterestedChart from './components/Charts/PlacementCell/PlacedVsInterestedChart'
 import StarRating from 'vue-star-rating'
 import VueStars from 'vue-stars'
 
-
 import CompanyQuestionComponent from './components/Utility/CompanyQuestionsComponent'
+
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import Notify from 'vue-notify-me'
-/*Spinners*/
-Vue.component('half-circle-spinner', HalfCircleSpinner)
-Vue.component('fulfilling-bouncing-circle-spinner' ,FulfillingBouncingCircleSpinner)
+import VueChartkick from 'vue-chartkick'
+import Chart from 'chart.js'
+
+Vue.use(VueChartkick, {adapter: Chart})
 /*Vuex store*/
 Vue.use(Vuex)
 /*Vuetify theme*/
@@ -61,8 +64,10 @@ Vue.component('star-rating', StarRating)
 Vue.component('app-add-question-component', AddQuestionComponent)
 Vue.component('app-practice-component', PracticeCompanyWiseComponent)
 Vue.component('app-practice-categorywise', PracticeCategoryWiseComponent)
+Vue.component('app-student-dashboard', StudentDashboardComponent)
+Vue.component('app-spc-dashboard', PlacementCellDashboardComponent)
 Vue.component('vue-stars', VueStars)
-
+Vue.component('app-chart-placed-vs-interested', PlacedVsInterestedChart)
 Vue.component('app-company-questions', CompanyQuestionComponent)
 Vue.config.productionTip = false
 
@@ -74,6 +79,7 @@ new Vue({
   BASE_URL:'http://localhost:3000/',
   render: h => h(App),
   created(){
+    this.$store.dispatch('autoSignIn')
     this.$store.dispatch('loadCompanies')
     this.$store.dispatch('loadJobProfiles')
     this.$store.dispatch('loadPlacementSeasons')
@@ -85,5 +91,6 @@ new Vue({
     this.$store.dispatch('loadTags')
     this.$store.dispatch('loadPlacementPolicies')
     this.$store.dispatch('loadAreaOfInterests')
+    this.$store.dispatch('loadQuestionTags')
   }
 })

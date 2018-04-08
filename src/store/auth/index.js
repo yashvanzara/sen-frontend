@@ -4,7 +4,7 @@ const BASE_URL = constants.BASE_URL
 const MODEL_URL = '/user/authenticate/'
 import {EventBus} from "../../Utility/EventBus";
 import {jwt} from 'jsonwebtoken';
-
+var jwtDecode = require('jwt-decode');
 export default {
   state:{
     isLoggedIn:false,
@@ -51,6 +51,12 @@ export default {
         })
     },
     autoSignIn({commit, getters}){
+      const token = localStorage.getItem('placement_portal_token')
+      if(token){
+        var decoded = jwtDecode(token)
+        commit('setLoggedUser', decoded.data[0])
+      }
+
 
     },
     signOut({commit, getters}){

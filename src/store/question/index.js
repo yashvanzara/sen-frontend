@@ -1,5 +1,6 @@
 import axios from 'axios'
 import constants from '../../Utility/constants'
+
 const BASE_URL = constants.BASE_URL
 const MODEL_URL = '/question/'
 export default {
@@ -40,17 +41,26 @@ export default {
           console.log(error.data)
         })
     },
-    createQuestion({commit, getters, dispatch}, payload, tagsPayload) {
+    createQuestion({commit, getters, dispatch}, payload) {
       for (var c in payload) {
         console.log(c + ":" + payload[c])
       }
-      if(tagsPayload!==null && tagsPayload!==undefined&&tagsPayload.length>0){
-        dispatch('addQuestionTags', tagsPayload)
-      }
-      axios.post(BASE_URL + MODEL_URL, payload)
+      console.log(payload.data)
+      axios.post(BASE_URL + MODEL_URL, payload.data)
         .then(response => {
-          commit('createQuestion', payload)
-          dispatch('loadQuestions')
+          console.log(response)
+          commit('createQuestion', response.data.questions[0])
+          if (payload.tags != undefined && payload.tags != null && payload.tags.length > 0) {
+            const question_id = response.data.questions[0].question_Id
+            for (var i = 0; i < payload.tags.length; ++i) {
+              let tag_payload = {
+                questionTag_QuestionId: question_id,
+                questionTag_TagId: payload.tags[i]
+              }
+              dispatch('addQuestionTag', tag_payload)
+            }
+          }
+
         })
         .catch(error => {
           console.log(error)
@@ -60,6 +70,7 @@ export default {
       axios.delete(BASE_URL + MODEL_URL + payload.question_Id)
         .then(response => {
           commit('deleteQuestion', payload)
+          commit('deleteQuestionTags', payload)
         })
         .catch(error => {
           console.log(error.data)
