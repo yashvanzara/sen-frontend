@@ -1,10 +1,13 @@
 const constants = {
-  BASE_URL: 'http://localhost:3000',
+  BASE_URL: 'http://192.168.43.239:3000',
   PRODUCTION_URL: '',
   ONLY_PLACEMENT_CELL_MEMBER: 4,
   ONLY_STUDENT: 2,
   PLACEMEN_CELL_MEMBER_AND_STUDENT: 6,
   ADMIN: 1,
+  QUESTION_SOLVED:1,
+  QUESTION_NEEDS_REVIEW:2,
+  QUESTION_HELP_NEEDED:4,
 
   //Failure Scenarios
   INVALID_DATES: 'Please correct the dates!',

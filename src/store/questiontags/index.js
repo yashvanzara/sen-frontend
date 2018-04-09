@@ -16,7 +16,9 @@ export default {
       state.loadedQuestionTags.push(payload)
     },
     deleteQuestionTags(state, payload){
-
+      state.loadedQuestionTags = state.loadedQuestionTags.filter(tag => {
+        return tag.questionTag_QuestionId !== payload.question_Id
+      })
     }
 
   },

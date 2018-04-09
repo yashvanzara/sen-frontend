@@ -12,7 +12,7 @@
     computed: {
       chart_data() {
         return [
-          ['Unplaced Students', this.unplacedCount],
+          ['Interested Students', this.unplacedCount],
           ['Placed Students', this.placedCount]
         ]
       },

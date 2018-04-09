@@ -30,6 +30,13 @@ const MAVON = {
     alignright: true,
     subfield: true,
     preview: true
+  },
+  toolbar_preview: {
+    fullscreen: true,
+    subfield: true,
+    defaultOpen:'preview',
+    preview: false
   }
+
 }
 module.exports = MAVON;

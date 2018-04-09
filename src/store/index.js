@@ -13,6 +13,7 @@ import Auth from './auth'
 import loadedPlacementPolicies from './placementpolicy'
 import loadedAreaOfInterests from './areaofinterest'
 import loadedQuestionTags from './questiontags'
+import loadedStudentProgress from './studentprogress'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -29,6 +30,7 @@ export const store = new Vuex.Store({
     auth:Auth,
     placementpolicies:loadedPlacementPolicies,
     areaofinterst:loadedAreaOfInterests,
-    questiontags:loadedQuestionTags
+    questiontags:loadedQuestionTags,
+    studenrprogress:loadedStudentProgress
   }
 })

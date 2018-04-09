@@ -75,13 +75,13 @@ export default {
       return state.isLoggedIn
     },
     isPlacementCellMember(state){
-      return true
+      return state.loggedUser.user_TypeFlag === constants.ONLY_PLACEMENT_CELL_MEMBER
     },
     isAdmin(state){
-      return true
+      return state.loggedUser.user_TypeFlag === constants.ADMIN
     },
     isPlacementCellMemberAndStudent(state) {
-      return true
+      return state.loggedUser.user_TypeFlag === constants.PLACEMEN_CELL_MEMBER_AND_STUDENT
     }
   }
 }

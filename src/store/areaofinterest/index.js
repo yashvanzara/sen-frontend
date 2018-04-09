@@ -5,9 +5,9 @@ const MODEL_URL = '/areaofinterest/'
 
 export default {
   state:{
-    loadedAreaOfInterests:{
+    loadedAreaOfInterests:[
 
-    }
+    ]
   },
   mutations:{
     setLoadedAreaOfInterests(state, payload){
@@ -28,17 +28,18 @@ export default {
       state.loadedAreaOfInterests.push(payload)
     },
     deleteAreaOfInterest(state, payload){
+      for(var c in payload){
+        console.log(c, payload[c])
+      }
       //Bugg AOI
       state.loadedAreaOfInterests = state.loadedAreaOfInterests.filter(interest =>{
-        return interest.areaOfInterest_JobProfileId !== payload.areaOfInterest_JobProfileId &&
-          interest.areaOfInterest_StudentId !== payload.areaOfInterest_StudentId
-      })
+         return (interest.areaOfInterest_JobProfileId !== payload.areaOfInterest_JobProfileId) &&
+           (interest.areaOfInterest_StudentId !== payload.areaOfInterest_StudentId)
+       })
     }
   },
   actions:{
     addAreaOfInterest({commit, getters, dispatch}, payload){
-      console.log(BASE_URL + MODEL_URL)
-      console.log(payload)
       axios.post(BASE_URL + MODEL_URL, payload)
         .then(response => {
           commit('addAreaOfInterest', payload)
@@ -60,10 +61,12 @@ export default {
           console.log(error)
         })
     },
-    deleteAreaOfInterest({commit, getters}, payload){
+    deleteAreaOfInterest({commit, getters, dispatch}, payload){
       axios.delete(BASE_URL + MODEL_URL + payload.areaOfInterest_StudentId + "/" + payload.areaOfInterest_JobProfileId+"/")
         .then(response => {
-          commit('deleteAreaOfInterest', payload)
+          //commit('deleteAreaOfInterest', payload)
+          //Work around for area of interests, reload it from server
+          dispatch('loadAreaOfInterests')
         })
         .catch(error => {
           console.log(error)

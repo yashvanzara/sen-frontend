@@ -8,7 +8,8 @@
     <!--<app-job-profile></app-job-profile>-->
     <!--<app-placement-season></app-placement-season>-->
     <!--<app-add-job-opening></app-add-job-opening>-->
-    <app-spc-dashboard></app-spc-dashboard>
+    <app-spc-dashboard v-if="userIsAuthenticated"></app-spc-dashboard>
+    <app-student-dashboard></app-student-dashboard>
   </v-container>
 </template>
 
@@ -17,6 +18,11 @@
   export default {
     data() {
       return {}
+    },
+    computed:{
+      userIsAuthenticated(){
+        return this.$store.getters.isLoggedIn
+      }
     }
   }
 </script>

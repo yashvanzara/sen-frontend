@@ -5,6 +5,7 @@ import 'vuetify/dist/vuetify.css'
 import { store } from './store'
 import App from './App'
 import router from './router'
+import VueMarkdown from 'vue-markdown'
 
 import LoginComponent from './components/auth/LoginComponent'
 import StudentRegisterComponent from './components/auth/StudentRegisterComponent'
@@ -26,6 +27,9 @@ import PracticeCategoryWiseComponent from './components/Training/PracticeCategor
 import StudentDashboardComponent from './components/Dashboard/StudentDashboard'
 import PlacementCellDashboardComponent from './components/Dashboard/SPCDashboard'
 import PlacedVsInterestedChart from './components/Charts/PlacementCell/PlacedVsInterestedChart'
+import AreaOfInterestChart from './components/Charts/PlacementCell/AreaOfInterestChart'
+import StudentProgressChart from './components/Charts/Student/QuestionsStatusChart'
+import QuestionsProgressByStudentsChart from './components/Charts/PlacementCell/QuestionsProgressByStudentsChart'
 import StarRating from 'vue-star-rating'
 import VueStars from 'vue-stars'
 
@@ -36,7 +40,6 @@ import 'mavon-editor/dist/css/index.css'
 import Notify from 'vue-notify-me'
 import VueChartkick from 'vue-chartkick'
 import Chart from 'chart.js'
-
 Vue.use(VueChartkick, {adapter: Chart})
 /*Vuex store*/
 Vue.use(Vuex)
@@ -45,6 +48,7 @@ Vue.use(Vuetify)
 /*Custom Components*/
 Vue.use(mavonEditor)
 
+Vue.component('vue-markdown', VueMarkdown)
 Vue.component('app-student-register-component', StudentRegisterComponent)
 Vue.component('app-login-component', LoginComponent)
 Vue.component('app-program', ProgramComponent)
@@ -69,6 +73,9 @@ Vue.component('app-spc-dashboard', PlacementCellDashboardComponent)
 Vue.component('vue-stars', VueStars)
 Vue.component('app-chart-placed-vs-interested', PlacedVsInterestedChart)
 Vue.component('app-company-questions', CompanyQuestionComponent)
+Vue.component('app-chart-area-of-interest', AreaOfInterestChart)
+Vue.component('app-chart-student-progress', StudentProgressChart)
+Vue.component('app-chart-questions-solved-by-students', QuestionsProgressByStudentsChart)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -80,6 +87,7 @@ new Vue({
   render: h => h(App),
   created(){
     this.$store.dispatch('autoSignIn')
+    this.$store.dispatch('loadTags')
     this.$store.dispatch('loadCompanies')
     this.$store.dispatch('loadJobProfiles')
     this.$store.dispatch('loadPlacementSeasons')
@@ -88,7 +96,7 @@ new Vue({
     this.$store.dispatch('loadPlacementSeasons')
     this.$store.dispatch('loadQuestions')
     this.$store.dispatch('loadUsers')
-    this.$store.dispatch('loadTags')
+    this.$store.dispatch('loadStudentProgress')
     this.$store.dispatch('loadPlacementPolicies')
     this.$store.dispatch('loadAreaOfInterests')
     this.$store.dispatch('loadQuestionTags')
