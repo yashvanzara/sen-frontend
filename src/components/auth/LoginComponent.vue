@@ -31,6 +31,7 @@
 
 <script>
   import constants from '../../Utility/constants'
+  import {EventBus} from "../../Utility/EventBus";
 
   export default {
     data() {
@@ -43,13 +44,12 @@
     methods: {
       signIn() {
         this.$store.dispatch('signIn', {user_StudentId: this.user_StudentId, user_Password: this.user_Password})
-          .then(() => {
-            console.log(this.$store.getters.isLoggedIn)
-            if (this.$store.getters.isLoggedIn === true) {
-              this.$router.push('/profile')
-            }
-          })
       }
+    },
+    mounted(){
+      EventBus.$on('login-success', data => {
+        this.$router.push('/')
+      });
     }
   }
 </script>

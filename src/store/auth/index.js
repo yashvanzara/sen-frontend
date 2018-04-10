@@ -14,12 +14,17 @@ export default {
     setLoggedUser(state, payload){
       state.isLoggedIn = true
       state.loggedUser = payload
-      // EventBus.$emit('notify-me', {
-      //   data:{
-      //     title:constants.AUTH_SUCCESS,
-      //     status:constants.COLOUR_GREEN
-      //   }
-      // })
+      EventBus.$emit('notify-me', {
+        data:{
+          title:constants.AUTH_SUCCESS,
+          status:constants.COLOUR_GREEN
+        }
+      })
+      EventBus.$emit('login-success', {
+        data:{
+
+        }
+      })
     },
     signOut(state){
       state.isLoggedIn = false

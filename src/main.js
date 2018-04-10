@@ -30,6 +30,7 @@ import PlacedVsInterestedChart from './components/Charts/PlacementCell/PlacedVsI
 import AreaOfInterestChart from './components/Charts/PlacementCell/AreaOfInterestChart'
 import StudentProgressChart from './components/Charts/Student/QuestionsStatusChart'
 import QuestionsProgressByStudentsChart from './components/Charts/PlacementCell/QuestionsProgressByStudentsChart'
+import ResumeManagementComponent from './components/User/ResumeManagementComponent'
 import StarRating from 'vue-star-rating'
 import VueStars from 'vue-stars'
 
@@ -73,6 +74,7 @@ Vue.component('app-spc-dashboard', PlacementCellDashboardComponent)
 Vue.component('vue-stars', VueStars)
 Vue.component('app-chart-placed-vs-interested', PlacedVsInterestedChart)
 Vue.component('app-company-questions', CompanyQuestionComponent)
+Vue.component('app-resume-management-component', ResumeManagementComponent)
 Vue.component('app-chart-area-of-interest', AreaOfInterestChart)
 Vue.component('app-chart-student-progress', StudentProgressChart)
 Vue.component('app-chart-questions-solved-by-students', QuestionsProgressByStudentsChart)
@@ -89,13 +91,14 @@ new Vue({
     this.$store.dispatch('autoSignIn')
     this.$store.dispatch('loadTags')
     this.$store.dispatch('loadCompanies')
+    this.$store.dispatch('loadUsers')
     this.$store.dispatch('loadJobProfiles')
     this.$store.dispatch('loadPlacementSeasons')
     this.$store.dispatch('loadPrograms')
     this.$store.dispatch('loadCompanyQuestions')
     this.$store.dispatch('loadPlacementSeasons')
     this.$store.dispatch('loadQuestions')
-    this.$store.dispatch('loadUsers')
+    this.$store.dispatch('loadResumes')
     this.$store.dispatch('loadStudentProgress')
     this.$store.dispatch('loadPlacementPolicies')
     this.$store.dispatch('loadAreaOfInterests')

@@ -1,5 +1,5 @@
 const constants = {
-  BASE_URL: 'http://192.168.43.239:3000',
+  BASE_URL: 'http://localhost:3000',
   PRODUCTION_URL: '',
   ONLY_PLACEMENT_CELL_MEMBER: 4,
   ONLY_STUDENT: 2,
