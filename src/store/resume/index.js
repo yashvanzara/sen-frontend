@@ -77,7 +77,6 @@ export default {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement('a');
           link.href = url;
-          window.open(url, '_blank')
           var file_name = payload.resume_StudentId + "_" + payload.resume_JobProfileId + ".pdf"
           link.setAttribute('download', file_name);
           document.body.appendChild(link);
@@ -88,20 +87,20 @@ export default {
         })
     },
     openResume({commit, getters}, payload) {
-      axios({
-        url: BASE_URL + MODEL_URL + payload.resume_StudentId + "/" + payload.resume_JobProfileId,
-        responseType: 'blob',
-        method: 'GET'
-      })
-        .then(response => {
-          const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement('a');
-          link.href = url;
-          window.open(url, '_blank')
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      // axios({
+      //   url: BASE_URL + MODEL_URL + payload.resume_StudentId + "/" + payload.resume_JobProfileId,
+      //   responseType: 'blob',
+      //   method: 'GET'
+      // })
+      //   .then(response => {
+      //     const url = window.URL.createObjectURL(new Blob([response.data]));
+      //     const link = document.createElement('a');
+      //     link.href = url;
+      //     window.open(url, '_blank')
+      //   })
+      //   .catch(error => {
+      //     console.log(error)
+      //   })
     }
 
   },

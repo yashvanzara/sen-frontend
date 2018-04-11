@@ -4,6 +4,7 @@
     <app-user-profile-component></app-user-profile-component>
     <app-areas-of-interest></app-areas-of-interest>
     <app-resume-management-component></app-resume-management-component>
+    <app-message-template></app-message-template>
   </v-container>
 </template>
 <script>

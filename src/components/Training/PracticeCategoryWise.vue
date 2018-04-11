@@ -2,23 +2,24 @@
   <v-container mt-0>
     <h3>Category wise</h3>
     <v-layout row wrap>
-      <!--<v-flex lg5>-->
-        <!--<v-select-->
-          <!--label="Filter Questions"-->
-          <!--:items="status"-->
-          <!--v-model="selectedType"-->
-          <!--item-text="progress_status"-->
-          <!--item-value="Value"-->
-        <!--&gt;-->
-        <!--</v-select>-->
-      <!--</v-flex>-->
       <v-flex lg5>
         <v-select
           label="Filter Questions"
           :items="loadedTags"
+          max-height="150"
           item-text="allTags_TagName"
           item-value="allTags_Id"
-          v-model="selectedCategory"
+          v-model="selectedCategories"
+          multiple
+        >
+        </v-select>
+      </v-flex>
+      <v-flex offset-lg2 lg5>
+        <v-select
+          label="Filter Questions on Difficulty"
+          :items="difficulty_levels"
+          max-height="150"
+          v-model="selectedDifficulty"
         >
         </v-select>
       </v-flex>
@@ -26,24 +27,37 @@
     <v-layout row wrap>
       <v-flex>
         <h2 class="heading">{{displayedQuestion.question_Title}}</h2>
+        <h4>Question Creator: {{userFromId(displayedQuestion.question_CreatorUserId).user_FirstName + " " +
+          userFromId(displayedQuestion.question_CreatorUserId).user_LastName}}</h4>
+      </v-flex>
+      <v-flex>
+        <v-select
+          label="Update Question Status"
+          v-model="questionProgress"
+          :items="status"
+          item-text="progress_status"
+          item-value="Value"
+          max-height="150"
+        >
+        </v-select>
+      </v-flex>
+    </v-layout>
+
+    <v-layout row wrap>
+      <v-flex>
+        <v-btn color="primary" v-if="loadedQuestions.length!==index" v-on:click="previous">Previous</v-btn>
+        <v-btn color="primary" :disabled="loadedQuestions.length===index" v-on:click="next">Next</v-btn>
       </v-flex>
     </v-layout>
 
     <v-layout row wrap mt-5>
       <v-flex>
-        <mavon-editor v-model="displayedQuestion.question_Description" :placeholder="placeholder":ishljs="false" defaultOpen="preview" :editable="false"
+        <mavon-editor v-model="displayedQuestion.question_Description" :placeholder="placeholder" :ishljs="false"
+                      defaultOpen="preview" :editable="false"
                       language="en" :toolbars="toolbar"/>
       </v-flex>
     </v-layout>
-    <v-layout row wrap>
-      <v-spacer></v-spacer>
-      <v-flex>
-        <v-btn color="primary" v-if="loadedQuestions.length!==index" v-on:click="previous">Previous</v-btn>
-      </v-flex>
-      <v-flex>
-        <v-btn color="primary" v-on:click="next">Next</v-btn>
-      </v-flex>
-    </v-layout>
+
 
   </v-container>
 </template>
@@ -52,20 +66,25 @@
   import constants from '../../Utility/constants'
   import mavon from '../../Utility/mavon'
   import QuestionModel from '../../models/question'
+  import StudentProgressModel from '../../models/studentprogress'
+  import questiontag from "../../models/questiontag";
 
   export default {
     data() {
       return {
-        // status: [
-        //   {'progress_status': 'Solved', 'Value': constants.QUESTION_SOLVED},
-        //   {'progress_status': 'Review Questions', 'Value': constants.QUESTION_NEEDS_REVIEW},
-        //   {'progress_status': 'Help Needed', 'Value': constants.QUESTION_HELP_NEEDED},
-        // ],
-        // selectedType: 1,
+        status: [
+          {'progress_status': 'Solved', 'Value': constants.QUESTION_SOLVED},
+          {'progress_status': 'Needs Review', 'Value': constants.QUESTION_NEEDS_REVIEW},
+          {'progress_status': 'Help Needed', 'Value': constants.QUESTION_HELP_NEEDED},
+        ],
+        difficulty_levels: QuestionModel.difficulty_levels,
+        selectedType: 1,
         toolbar: mavon.toolbar_preview,
         placeholder: 'Question',
-        selectedCategory: 0,
-        index:0
+        selectedCategories: [],
+        editedItem: StudentProgressModel.default_object,
+        index: 0,
+        selectedDifficulty:-1
       }
     },
     computed: {
@@ -73,23 +92,104 @@
         return this.$store.getters.loadedTags
       },
       loadedQuestions() {
-        return this.$store.getters.loadedQuestions
+        // if (this.selectedCategories.length > 0) {
+        //   // const questions = this.$store.getters.loadedQuestionTags.filter(questiontag => {
+        //   //   return this.selectedCategories.indexOf(questiontag.questionTag_TagId)>-1
+        //   // })
+        //   // console.log(questions)
+        // } else {
+
+        // }
+
+        if(this.selectedDifficulty > -1){
+          const questions = this.$store.getters.loadedQuestions.filter(question => {
+            return question.question_DifficultyLevel == this.selectedDifficulty
+          })
+          if(questions.length > 0){
+            return questions
+          }else{
+            return this.$store.getters.loadedQuestions
+          }
+        }else{
+          return this.$store.getters.loadedQuestions
+        }
+
       },
-      displayedQuestion(){
+      loadedQuestionTags() {
+        return this.$store.getters.loadedQuestionTags
+      },
+      displayedQuestion() {
         return this.loadedQuestions[this.index]
+      },
+      totalQuestions() {
+        return parseInt(this.loadedQuestions.length)
+      },
+      loggedUser() {
+        return this.$store.getters.loggedUser
+      },
+      questionCreator() {
+        var userId = this.displayedQuestion.question_CreatorUserId
+        return this.userFromId(userId)
+      },
+      questionProgress: {
+        get: function () {
+          var ob = this.loadedStudentProgress.filter(progress => {
+            return progress.studentProgress_QuestionId === this.displayedQuestion.question_Id
+          })
+          if (ob[0] === undefined) {
+            return
+          } else {
+            return ob[0].studentProgress_Status
+          }
+
+        },
+        set: function (newStatus) {
+          this.editedItem = Object.assign({}, StudentProgressModel.default_object)
+          this.editedItem.studentProgress_Status = newStatus
+          this.editedItem.studentProgress_StudentId = this.loggedUser.user_StudentId
+          this.editedItem.studentProgress_QuestionId = this.displayedQuestion.question_Id
+          this.displayedQuestion.studentProgress_Status = newStatus
+          var question = this.loadedStudentProgress.filter(progress => {
+            return progress.studentProgress_QuestionId === this.displayedQuestion.question_Id
+          })
+          console.log(this.editedItem.studentProgress_Status)
+          if (question.length > 0) {
+            this.$store.dispatch('updateStudentProgress', this.editedItem)
+          } else {
+            this.$store.dispatch('addStudentProgress', this.editedItem)
+          }
+          EventBus.$emit('notify-me', {
+            data:{
+              title:constants.QUESTION_PROGRESS_SAVED,
+              status:constants.COLOUR_GREEN
+            }
+          })
+        }
+      },
+      loadedStudentProgress() {
+
+        return this.$store.getters.loadedStudentProgress.filter(progress => {
+          return progress.studentProgress_StudentId === this.loggedUser.user_StudentId
+        })
       }
     },
-    methods:{
-      next(){
-        if(this.loadedQuestions.length === this.index){
-          return
-        }
-        ++this.index;
+    methods: {
+      userFromId(id) {
+        return this.$store.getters.loadedUsers.filter(user => {
+          return user.user_StudentId === id
+        })[0]
       },
-      previous(){
-        if(this.index === 0){
+      next() {
+        if (this.index === this.totalQuestions - 1) {
           return
-        }else{
+        } else {
+          ++this.index;
+        }
+      },
+      previous() {
+        if (this.index === 0) {
+          return
+        } else {
           this.index--;
         }
       }
@@ -97,7 +197,7 @@
     mounted() {
 
     },
-    created(){
+    created() {
 
     }
   }

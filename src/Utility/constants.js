@@ -1,5 +1,5 @@
 const constants = {
-  BASE_URL: 'http://localhost:3000',
+  BASE_URL: 'http://192.168.43.239:3000',
   PRODUCTION_URL: '',
   ONLY_PLACEMENT_CELL_MEMBER: 4,
   ONLY_STUDENT: 2,
@@ -21,6 +21,7 @@ const constants = {
   COMPANY_CREATED: 'Company added successfully!',
   AUTH_SUCCESS: 'Authentication Successful!',
   QUESTION_ADDED_FOR_APPROVAL:'Question sent for approval!',
+  QUESTION_PROGRESS_SAVED:'Progress Saved!',
 
   //Validations
   RULES: {

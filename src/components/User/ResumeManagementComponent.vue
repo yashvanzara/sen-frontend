@@ -72,9 +72,6 @@
           <v-btn icon class="mx-0" @click="downloadResume(props.item)">
             <v-icon color="blue">cloud_download</v-icon>
           </v-btn>
-          <v-btn icon class="mx-0" @click="openResume(props.item)">
-            <v-icon color="green">open_in_new</v-icon>
-          </v-btn>
           <v-btn icon class="mx-0" @click="editItem(props.item)">
             <v-icon color="teal">edit</v-icon>
           </v-btn>
@@ -141,9 +138,6 @@
       },
       downloadResume(item) {
         this.$store.dispatch('downloadResume', item);
-      },
-      openResume(item) {
-        this.$store.dispatch('openResume', item);
       },
       editItem(item) {
         this.editedIndex = this.userResumes.indexOf(item)

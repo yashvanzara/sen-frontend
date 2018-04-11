@@ -31,6 +31,7 @@ import AreaOfInterestChart from './components/Charts/PlacementCell/AreaOfInteres
 import StudentProgressChart from './components/Charts/Student/QuestionsStatusChart'
 import QuestionsProgressByStudentsChart from './components/Charts/PlacementCell/QuestionsProgressByStudentsChart'
 import ResumeManagementComponent from './components/User/ResumeManagementComponent'
+import MessageTemplateComponent from './components/Notification/MessageTemplateComponent'
 import StarRating from 'vue-star-rating'
 import VueStars from 'vue-stars'
 
@@ -78,6 +79,7 @@ Vue.component('app-resume-management-component', ResumeManagementComponent)
 Vue.component('app-chart-area-of-interest', AreaOfInterestChart)
 Vue.component('app-chart-student-progress', StudentProgressChart)
 Vue.component('app-chart-questions-solved-by-students', QuestionsProgressByStudentsChart)
+Vue.component('app-message-template', MessageTemplateComponent)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -99,6 +101,7 @@ new Vue({
     this.$store.dispatch('loadPlacementSeasons')
     this.$store.dispatch('loadQuestions')
     this.$store.dispatch('loadResumes')
+    this.$store.dispatch('loadTemplates')
     this.$store.dispatch('loadStudentProgress')
     this.$store.dispatch('loadPlacementPolicies')
     this.$store.dispatch('loadAreaOfInterests')
