@@ -24,6 +24,24 @@
           </v-flex>
         </v-layout>
         <v-layout row wrap mt-5>
+          <v-flex>
+            <v-select
+              label="Companies"
+              :items="loadedCompanies"
+              item-value="company_Id"
+              item-text="company_Name"
+              multiple
+              deletable-chips
+              chips
+              max-height="150"
+              autocomplete
+              v-model="companies"
+            >
+            </v-select>
+          </v-flex>
+        </v-layout>
+
+        <v-layout row wrap mt-5>
           <h3>Difficulty</h3>
           <!--<star-rating :show-rating="false" :star-size="50"-->
           <!--v-model="editedItem.question_DifficultyLevel"></star-rating>-->
@@ -69,12 +87,16 @@
         difficulty_levels: QuestionModel.difficulty_levels,
         placeholder: "Begin editing...",
         toolbar: mavon.toolbar_editing,
-        question_tags: []
+        question_tags: [],
+        companies:[]
       }
     },
     computed: {
       loadedTags() {
         return this.$store.getters.loadedTags
+      },
+      loadedCompanies(){
+        return this.$store.getters.loadedCompanies
       }
     },
     methods: {
@@ -85,7 +107,8 @@
         }
         var payload = {
           data:editedData,
-          tags:this.question_tags
+          tags:this.question_tags,
+          companies:this.companies
         }
 
         this.$store.dispatch('createQuestion', payload)

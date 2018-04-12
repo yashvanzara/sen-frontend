@@ -17,6 +17,8 @@ import ProfileHolderComponent from '../components/User/ProfileHolderComponent'
 import AddQuestionComponent from '../components/Training/AddQuestionComponent'
 import PracticeCompanyComponent from '../components/Training/PracticeCompanyWise'
 import PracticeCategoryComponent from '../components/Training/PracticeCategoryWise'
+import PageNotFoundComponent from '../components/Pages/404'
+import SolveSingleCompanyQuestions from '../components/Training/CompanyQuestions'
 import AuthGuard from './auth-guard'
 Vue.use(Router)
 export default new Router({
@@ -98,15 +100,31 @@ export default new Router({
       component:AddQuestionComponent
     },
     {
-      path:'/practice/company',
+      path:'/practice/company/',
       name:'PracticeCompanySection',
       component:PracticeCompanyComponent
     },
     {
-      path:'/practice/category',
+      path:'/practice/category/:category_id',
+      name:'PracticeCategorySectionId',
+      component:PracticeCategoryComponent
+    },
+    {
+      path:'/practice/category/',
       name:'PracticeCategorySection',
       component:PracticeCategoryComponent
+    },
+    {
+      path:'/404/',
+      name:'404NotFound',
+      component:PageNotFoundComponent
+    },
+    {
+      path:'/practice/company/:id',
+      name:'solvesinglecompanyquestions',
+      component:SolveSingleCompanyQuestions
     }
+
   ],
   mode:'history',
 })

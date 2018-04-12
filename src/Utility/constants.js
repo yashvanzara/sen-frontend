@@ -1,5 +1,5 @@
 const constants = {
-  BASE_URL: 'http://192.168.43.239:3000',
+  BASE_URL: 'http://localhost:3000',
   PRODUCTION_URL: '',
   ONLY_PLACEMENT_CELL_MEMBER: 4,
   ONLY_STUDENT: 2,
@@ -13,6 +13,9 @@ const constants = {
   INVALID_DATES: 'Please correct the dates!',
   COLOUR_RED: '#F44336',
   AUTH_FAILURE: 'Authentication Failure! Please check credentials!',
+  NO_QUESTIONS_AVAILABLE:'No Questions available yet!',
+  ALREADY_LAST_QUESTION:'Already on last Question!',
+  ALREADY_FIRST_QUESTION:'Already on first Question!',
 
   //Success scenarios
   COLOUR_GREEN: '#00e676',

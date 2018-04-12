@@ -60,7 +60,17 @@ export default {
               dispatch('addQuestionTag', tag_payload)
             }
           }
-
+          if (payload.companies != undefined && payload.companies != null && payload.companies.length > 0){
+            const ques_id = response.data.questions[0].question_Id
+            for(var i=0; i<payload.companies.length; ++i){
+              let company_question_payload = {
+                companyQuestion_QuestionId:ques_id,
+                companyQuestion_CompanyId: payload.companies[i]
+              }
+              console.log(company_question_payload)
+              dispatch('addCompanyQuestion', company_question_payload)
+            }
+          }
         })
         .catch(error => {
           console.log(error)

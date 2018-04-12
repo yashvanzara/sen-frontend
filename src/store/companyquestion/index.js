@@ -12,6 +12,9 @@ export default {
   mutations:{
     setLoadedCompanyQuestions(state, payload){
       state.loadedCompanyQuestions = payload
+    },
+    addCompanyQuestion(state, payload){
+      state.loadedCompanyQuestions.push(payload)
     }
   },
   actions:{
@@ -22,6 +25,15 @@ export default {
         })
         .catch(error => {
           console.log(error)
+        })
+    },
+    addCompanyQuestion({commit, getters, dispatch}, payload){
+      axios.post(BASE_URL + MODEL_URL, payload)
+        .then(response => {
+          commit('addCompanyQuestion', payload)
+        })
+        .catch(error => {
+
         })
     }
   },

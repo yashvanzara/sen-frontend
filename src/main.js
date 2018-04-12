@@ -32,10 +32,12 @@ import StudentProgressChart from './components/Charts/Student/QuestionsStatusCha
 import QuestionsProgressByStudentsChart from './components/Charts/PlacementCell/QuestionsProgressByStudentsChart'
 import ResumeManagementComponent from './components/User/ResumeManagementComponent'
 import MessageTemplateComponent from './components/Notification/MessageTemplateComponent'
+import CompanyQuestionComponent from './components/Utility/CompanyQuestionsComponent'
+import PageNotFoundComponent from './components/Pages/404'
 import StarRating from 'vue-star-rating'
 import VueStars from 'vue-stars'
 
-import CompanyQuestionComponent from './components/Utility/CompanyQuestionsComponent'
+import SolveSingleCompanyComponent from './components/Training/CompanyQuestions'
 
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
@@ -80,6 +82,8 @@ Vue.component('app-chart-area-of-interest', AreaOfInterestChart)
 Vue.component('app-chart-student-progress', StudentProgressChart)
 Vue.component('app-chart-questions-solved-by-students', QuestionsProgressByStudentsChart)
 Vue.component('app-message-template', MessageTemplateComponent)
+Vue.component('app-company-questions', SolveSingleCompanyComponent)
+Vue.component('app-404', PageNotFoundComponent)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -106,5 +110,6 @@ new Vue({
     this.$store.dispatch('loadPlacementPolicies')
     this.$store.dispatch('loadAreaOfInterests')
     this.$store.dispatch('loadQuestionTags')
+    this.$store.dispatch('loadApp')
   }
 })

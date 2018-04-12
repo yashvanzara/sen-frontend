@@ -2,29 +2,6 @@
   <v-container mt-0>
     <h3>Category wise</h3>
     <v-layout row wrap>
-      <v-flex lg5>
-        <v-select
-          label="Filter Questions"
-          :items="loadedTags"
-          max-height="150"
-          item-text="allTags_TagName"
-          item-value="allTags_Id"
-          v-model="selectedCategories"
-          multiple
-        >
-        </v-select>
-      </v-flex>
-      <v-flex offset-lg2 lg5>
-        <v-select
-          label="Filter Questions on Difficulty"
-          :items="difficulty_levels"
-          max-height="150"
-          v-model="selectedDifficulty"
-        >
-        </v-select>
-      </v-flex>
-    </v-layout>
-    <v-layout row wrap>
       <v-flex>
         <h2 class="heading">{{displayedQuestion.question_Title}}</h2>
         <h4>Question Creator: {{userFromId(displayedQuestion.question_CreatorUserId).user_FirstName + " " +
@@ -84,7 +61,7 @@
         selectedCategories: [],
         editedItem: StudentProgressModel.default_object,
         index: 0,
-        selectedDifficulty:-1
+        selectedDifficulty:-1,
       }
     },
     computed: {
@@ -92,26 +69,26 @@
         return this.$store.getters.loadedTags
       },
       loadedQuestions() {
-        // if (this.selectedCategories.length > 0) {
-        //   // const questions = this.$store.getters.loadedQuestionTags.filter(questiontag => {
-        //   //   return this.selectedCategories.indexOf(questiontag.questionTag_TagId)>-1
-        //   // })
-        //   // console.log(questions)
-        // } else {
-
-        // }
-
-        if(this.selectedDifficulty > -1){
-          const questions = this.$store.getters.loadedQuestions.filter(question => {
-            return question.question_DifficultyLevel == this.selectedDifficulty
+        var x = this.$route.params.category_id
+        if(x === undefined){
+          this.$router.push('/404')
+        }
+        else{
+          var questions = this.loadedQuestionTags.filter(questionTag => {
+            if(questionTag.questionTag_TagId === parseInt(x)){
+              return questionTag.questionTag_QuestionId
+            }
           })
-          if(questions.length > 0){
-            return questions
+          if(questions.length>0){
+            console.log("filter")
+            const loadedques =  this.$store.getters.loadedQuestions.filter(question => {
+              return questions.indexOf(question.question_Id) > -1
+            })
+            console.log(loadedques)
+            return loadedques
           }else{
             return this.$store.getters.loadedQuestions
           }
-        }else{
-          return this.$store.getters.loadedQuestions
         }
 
       },
@@ -122,7 +99,7 @@
         return this.loadedQuestions[this.index]
       },
       totalQuestions() {
-        return parseInt(this.loadedQuestions.length)
+        return this.loadedQuestions.length
       },
       loggedUser() {
         return this.$store.getters.loggedUser
@@ -167,7 +144,6 @@
         }
       },
       loadedStudentProgress() {
-
         return this.$store.getters.loadedStudentProgress.filter(progress => {
           return progress.studentProgress_StudentId === this.loggedUser.user_StudentId
         })

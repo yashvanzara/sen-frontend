@@ -16,6 +16,7 @@ import loadedQuestionTags from './questiontags'
 import loadedStudentProgress from './studentprogress'
 import loadedResumes from './resume'
 import loadedTemplates from './messagetemplate'
+import appLoaded from './shared'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -35,6 +36,7 @@ export const store = new Vuex.Store({
     questiontags:loadedQuestionTags,
     studenrprogress:loadedStudentProgress,
     resume:loadedResumes,
-    templates:loadedTemplates
+    templates:loadedTemplates,
+    app:appLoaded
   }
 })
