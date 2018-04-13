@@ -12,17 +12,26 @@ export default {
   mutations:{
     createJobOpening(state, payload){
       state.loadedJobOpenings.push(payload)
+    },
+    setLoadedJobOpenings(state, payload){
+      state.loadedJobOpenings = payload
     }
   },
   actions:{
-    loadJobOpenings({commit, getters}){
-
-    },
     createJobOpening({commit, getters, dispatch}, payload){
       axios.post(BASE_URL + MODEL_URL, payload)
         .then(response => {
           console.log(response.data)
           dispatch('loadJobOpenings')
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    loadJobOpenings({commit, getters}){
+      axios.get(BASE_URL + MODEL_URL)
+        .then(response => {
+          commit('setLoadedJobOpenings', response.data)
         })
         .catch(error => {
           console.log(error)

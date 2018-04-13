@@ -67,7 +67,7 @@
 
     </v-navigation-drawer>
 
-    <v-toolbar  dark class="primary">
+    <v-toolbar dark class="primary">
       <v-toolbar-side-icon
         @click.stop="sideNav = !sideNav"
         class="hidden-sm-and-up"></v-toolbar-side-icon>
@@ -89,6 +89,17 @@
           <v-icon left dark>{{ item.icon }}</v-icon>
           {{ item.name }}
         </v-btn>
+        <v-menu offset-y v-if="userIsAuthenticated">
+          <v-btn primary flat color="white" slot="activator">
+            <v-icon left dark right>chrome_reader_mode</v-icon>
+            Training
+          </v-btn>
+          <v-list>
+            <v-list-tile v-for="item in trainingItems" :key="item.name" :to="item.link">
+              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
 
         <v-menu offset-y v-if="userIsPlacementCellMember">
           <v-btn primary flat color="white" slot="activator">
@@ -102,17 +113,33 @@
           </v-list>
         </v-menu>
 
-        <v-menu offset-y v-if="userIsAuthenticated">
+        <v-menu offset-y :close-on-content-click="false">
           <v-btn primary flat color="white" slot="activator">
-            <v-icon left dark right>chrome_reader_mode</v-icon>
-            Training
+            <v-badge left overlap color="red">
+              <span slot="badge">6</span>
+              <v-icon left dark>notifications</v-icon>
+              Notifications
+            </v-badge>
           </v-btn>
-          <v-list>
-            <v-list-tile v-for="item in trainingItems" :key="item.name" :to="item.link">
-              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
+          <v-container>
+            <v-layout row wrap>
+              <v-flex xs12 lg12 mb-3>
+                <v-expansion-panel popout>
+                  <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
+                    <div slot="header">Item</div>
+                    <v-card>
+                      <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </v-card-text>
+                    </v-card>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-flex>
+            </v-layout>
+          </v-container>
         </v-menu>
+
 
         <v-btn
           v-if="userIsAuthenticated"
@@ -149,7 +176,8 @@
         if (this.userIsAuthenticated) {
           menuItems = [
             {link: '/profile', icon: 'face', name: 'Profile'},
-            {link: '/jobopenings/new', icon: 'work', name: 'Add Job Opening'}
+            {link: '/jobopening/new', icon: 'work', name: 'Add Job Opening'},
+            {link: '/jobopenings/', icon: 'list', name: 'View Job Openings'},
           ]
         } else {
           menuItems = [
@@ -160,7 +188,7 @@
 
         return menuItems
       },
-      trainingItems(){
+      trainingItems() {
         let trainingItems = [
           {link: '/training/addexperience/', icon: 'domain', name: 'Add interview experience'},
           {link: '/training/addquestion/', icon: 'domain', name: 'Add interview questions'},

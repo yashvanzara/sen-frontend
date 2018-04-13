@@ -45,10 +45,9 @@ export default {
       for (var c in payload) {
         console.log(c + ":" + payload[c])
       }
-      console.log(payload.data)
       axios.post(BASE_URL + MODEL_URL, payload.data)
         .then(response => {
-          console.log(response)
+          console.log(response.data)
           commit('createQuestion', response.data.questions[0])
           if (payload.tags != undefined && payload.tags != null && payload.tags.length > 0) {
             const question_id = response.data.questions[0].question_Id
@@ -87,12 +86,10 @@ export default {
         })
     },
     updateQuestion({commit, getters}, payload) {
-      for (var c in payload) {
-        console.log(c + ":" + payload[c])
-      }
-      axios.put(BASE_URL + MODEL_URL + payload.question_Id, payload)
+      console.log(payload)
+      axios.put(BASE_URL + MODEL_URL + payload.data.question_Id, payload.data)
         .then(response => {
-          commit('updateQuestion', payload)
+          commit('updateQuestion', payload.data)
         })
         .catch(error => {
           console.log(error.response.data)

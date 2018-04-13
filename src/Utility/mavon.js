@@ -33,7 +33,6 @@ const MAVON = {
   },
   toolbar_preview: {
     fullscreen: true,
-    subfield: true,
     defaultOpen:'preview',
     preview: false
   }

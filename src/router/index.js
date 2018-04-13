@@ -19,6 +19,7 @@ import PracticeCompanyComponent from '../components/Training/PracticeCompanyWise
 import PracticeCategoryComponent from '../components/Training/PracticeCategoryWise'
 import PageNotFoundComponent from '../components/Pages/404'
 import SolveSingleCompanyQuestions from '../components/Training/CompanyQuestions'
+import ListJobOpeningsComponent from '../components/Placement/ListJobOpenings'
 import AuthGuard from './auth-guard'
 Vue.use(Router)
 export default new Router({
@@ -39,12 +40,7 @@ export default new Router({
       component:StudentRegisterComponent
     },
     {
-      path:'/jobopenings/',
-      name:'ListJobOpenings',
-      component:ListJobOpenings
-    },
-    {
-      path:'/jobopenings/new/',
+      path:'/jobopening/new/',
       name:'NewJobOpening',
       component:AddJobOpeningComponent
     },
@@ -123,6 +119,11 @@ export default new Router({
       path:'/practice/company/:id',
       name:'solvesinglecompanyquestions',
       component:SolveSingleCompanyQuestions
+    },
+    {
+      path:'/jobopenings/',
+      name:'ListJobOpenings',
+      component:ListJobOpeningsComponent
     }
 
   ],

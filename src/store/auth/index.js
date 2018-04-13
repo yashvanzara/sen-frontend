@@ -22,13 +22,19 @@ export default {
       })
       EventBus.$emit('login-success', {
         data:{
-
+          // Required, do not change
         }
       })
     },
     signOut(state){
       state.isLoggedIn = false
       state.loggedUser = null
+      EventBus.$emit('notify-me', {
+        data:{
+          title:constants.SIGN_OUT,
+          status:constants.COLOUR_RED
+        }
+      })
     },
     updateLoggedUser(state, payload){
       state.loggedUser = payload

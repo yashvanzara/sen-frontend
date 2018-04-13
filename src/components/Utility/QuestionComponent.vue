@@ -115,8 +115,8 @@
           question_Solution: "",
           question_DifficultyLevel:null ,
           question_IsActive: 1,
-          question_CreatorUserId: "201712004",
-          question_ApprovedByUserId: "",
+          question_CreatorUserId: 0,
+          question_ApprovedByUserId: null,
         },
         difficulty_levels: QuestionModel.difficulty_levels
       }
@@ -147,15 +147,24 @@
         }
       },
       save() {
+        let editedData = {
+          ...this.editedItem
+        }
+        let payload = {
+          data:editedData,
+        }
+        console.log(payload)
         if (this.editedIndex > -1) {
-          this.$store.dispatch('updateQuestion', this.editedItem)
+          this.$store.dispatch('updateQuestion', payload)
         } else {
-          this.$store.dispatch('createQuestion', this.editedItem)
+          payload.data.question_CreatorUserId = this.itemCreator.user_StudentId
+          this.$store.dispatch('createQuestion',payload )
         }
         this.close()
       },
     },
     computed: {
+
       formTitle() {
         return this.editedIndex === -1 ? 'Add a Question' : 'Edit a Question'
       },
@@ -163,10 +172,7 @@
         return this.$store.getters.loadedQuestions
       },
       itemCreator() {
-        var user = this.$store.getters.loadedUsers.find(user => {
-          return user.user_StudentId === this.editedItem.question_CreatorUserId;
-        })
-        return user
+        return this.$store.getters.loggedUser
       }
     },
     created() {

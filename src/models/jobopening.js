@@ -20,4 +20,18 @@ export default {
     jobOpening_PlacementSeasonId: "",
     jobOpening_IsSummerInternship: 0,
   },
+  list_headers:[
+    {
+      text: 'Job Opening',
+      align: 'left',
+      sortable: true,
+      value: 'jobOpening_Id'
+    },
+    {
+      text: 'Company',
+      align: 'left',
+      sortable: false,
+      value: 'jobOpening_CompanyId'
+    },
+  ]
 };

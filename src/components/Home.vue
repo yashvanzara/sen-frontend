@@ -9,7 +9,7 @@
     <!--<app-placement-season></app-placement-season>-->
     <!--<app-add-job-opening></app-add-job-opening>-->
     <app-spc-dashboard v-if="userIsAuthenticated"></app-spc-dashboard>
-    <app-student-dashboard></app-student-dashboard>
+    <app-student-dashboard v-if="userIsAuthenticated"></app-student-dashboard>
   </v-container>
 </template>
 
@@ -26,3 +26,4 @@
     }
   }
 </script>
+

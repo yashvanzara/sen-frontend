@@ -106,6 +106,7 @@ new Vue({
     this.$store.dispatch('loadQuestions')
     this.$store.dispatch('loadResumes')
     this.$store.dispatch('loadTemplates')
+    this.$store.dispatch('loadJobOpenings')
     this.$store.dispatch('loadStudentProgress')
     this.$store.dispatch('loadPlacementPolicies')
     this.$store.dispatch('loadAreaOfInterests')

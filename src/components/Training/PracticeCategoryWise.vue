@@ -118,7 +118,6 @@
           } else {
             return ob[0].studentProgress_Status
           }
-
         },
         set: function (newStatus) {
           this.editedItem = Object.assign({}, StudentProgressModel.default_object)
