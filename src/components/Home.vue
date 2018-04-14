@@ -10,6 +10,7 @@
     <!--<app-add-job-opening></app-add-job-opening>-->
     <app-spc-dashboard v-if="userIsAuthenticated"></app-spc-dashboard>
     <app-student-dashboard v-if="userIsAuthenticated"></app-student-dashboard>
+    <span>{{ new Date() | moment("from", "now") }}</span>
   </v-container>
 </template>
 

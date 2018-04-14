@@ -26,6 +26,7 @@
     "vue-echarts": "^3.0.7",
     "vue-info-card": "^0.1.1",
     "vue-markdown": "^2.2.4",
+    "vue-moment": "^3.2.0",
     "vue-notify-me": "^1.1.0",
     "vue-router": "^3.0.1",
     "vue-star-rating": "^1.5.1",

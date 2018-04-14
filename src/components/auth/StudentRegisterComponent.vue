@@ -120,6 +120,18 @@
             </v-flex>
           </v-layout>
 
+          <v-layout row wrap>
+            <v-flex lg4 xs8 s8>
+              <v-text-field label="SSC Percentage" :rules="[constants.RULES.required]"
+                            v-model="user.user_sscMarks"></v-text-field>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-flex lg4 xs3 sm3>
+              <v-text-field label="HSC Percentage" :rules="[constants.RULES.required]"
+                            v-model="user.user_hscmarks"></v-text-field>
+            </v-flex>
+          </v-layout>
+
 
           <v-layout row wrap>
             <v-flex lg4 xs8 s8>
@@ -168,6 +180,8 @@
           user_JoinDate: new Date(),
           user_SscYear: "",
           user_HscYear: "",
+          user_sscMarks:0,
+          user_hscMarks:0,
           user_QualifyingBoard: "",
           user_QualifyingPercentage: "",
           user_QualifyingDegree: "",

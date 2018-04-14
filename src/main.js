@@ -6,7 +6,7 @@ import { store } from './store'
 import App from './App'
 import router from './router'
 import VueMarkdown from 'vue-markdown'
-
+import VueMoment from 'vue-moment'
 import LoginComponent from './components/auth/LoginComponent'
 import StudentRegisterComponent from './components/auth/StudentRegisterComponent'
 import ProgramComponent from './components/Utility/ProgramComponent'
@@ -34,9 +34,11 @@ import ResumeManagementComponent from './components/User/ResumeManagementCompone
 import MessageTemplateComponent from './components/Notification/MessageTemplateComponent'
 import CompanyQuestionComponent from './components/Utility/CompanyQuestionsComponent'
 import PageNotFoundComponent from './components/Pages/404'
+import NotificationComponent from './components/Notification/NotificationComponent'
+import SendNotificationComponent from './components/Notification/SendNotificationComponent'
 import StarRating from 'vue-star-rating'
 import VueStars from 'vue-stars'
-
+Vue.use(VueMoment)
 import SolveSingleCompanyComponent from './components/Training/CompanyQuestions'
 
 import mavonEditor from 'mavon-editor'
@@ -83,6 +85,8 @@ Vue.component('app-chart-student-progress', StudentProgressChart)
 Vue.component('app-chart-questions-solved-by-students', QuestionsProgressByStudentsChart)
 Vue.component('app-message-template', MessageTemplateComponent)
 Vue.component('app-company-questions', SolveSingleCompanyComponent)
+Vue.component('app-notification-dropdown', NotificationComponent)
+Vue.component('app-send-notifications', SendNotificationComponent)
 Vue.component('app-404', PageNotFoundComponent)
 Vue.config.productionTip = false
 
@@ -111,6 +115,9 @@ new Vue({
     this.$store.dispatch('loadPlacementPolicies')
     this.$store.dispatch('loadAreaOfInterests')
     this.$store.dispatch('loadQuestionTags')
+    this.$store.dispatch('loadNotifications')
+    this.$store.dispatch('loadNotificationInstances')
     this.$store.dispatch('loadApp')
+
   }
 })

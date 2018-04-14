@@ -26,6 +26,7 @@ const constants = {
   QUESTION_ADDED_FOR_APPROVAL:'Question sent for approval!',
   QUESTION_PROGRESS_SAVED:'Progress Saved!',
   SIGN_OUT:'Signed Out!',
+  NOTIFICATION_SENT:'Notification Sent!',
 
   //Validations
   RULES: {

@@ -15,6 +15,8 @@ export default {
   user_JoinDate:new Date(),
   user_SscYear:"",
   user_HscYear:"",
+  user_sscMarks:0,
+  user_hscMarks:0,
   user_QualifyingBoard:"",
   user_QualifyingPercentage:"",
   user_QualifyingDegree:"",

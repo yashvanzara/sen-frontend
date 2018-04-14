@@ -67,7 +67,12 @@
         })[0]
       },
       registerForOpening(item) {
-
+        let registration = {
+          jobOpeningRegistration_OpeningId:item.jobOpening_Id,
+          jobOpeningRegistration_StudentId:this.loggedUser.user_StudentId
+        }
+        console.log(registration)
+        this.$store.dispatch('registerForJobOpening', registration)
       },
       checkEligibility(item) {
         return this.eligibleCompanies.indexOf(item.jobOpening_Id) > -1

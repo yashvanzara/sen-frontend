@@ -20,6 +20,7 @@ import PracticeCategoryComponent from '../components/Training/PracticeCategoryWi
 import PageNotFoundComponent from '../components/Pages/404'
 import SolveSingleCompanyQuestions from '../components/Training/CompanyQuestions'
 import ListJobOpeningsComponent from '../components/Placement/ListJobOpenings'
+import SendNotificationComponent from '../components/Notification/SendNotificationComponent'
 import AuthGuard from './auth-guard'
 Vue.use(Router)
 export default new Router({
@@ -124,8 +125,12 @@ export default new Router({
       path:'/jobopenings/',
       name:'ListJobOpenings',
       component:ListJobOpeningsComponent
-    }
-
+    },
+    {
+      path:'/sendnotifications/',
+      name:'SendNotifications',
+      component:SendNotificationComponent
+    },
   ],
   mode:'history',
 })

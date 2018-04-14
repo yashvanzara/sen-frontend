@@ -17,6 +17,8 @@ import loadedStudentProgress from './studentprogress'
 import loadedResumes from './resume'
 import loadedTemplates from './messagetemplate'
 import appLoaded from './shared'
+import loadedNotifications from './notifications'
+import loadedNotificationInstances from './notificationreceiver'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -37,6 +39,8 @@ export const store = new Vuex.Store({
     studenrprogress:loadedStudentProgress,
     resume:loadedResumes,
     templates:loadedTemplates,
-    app:appLoaded
+    app:appLoaded,
+    notifications:loadedNotifications,
+    notificationInstances:loadedNotificationInstances
   }
 })

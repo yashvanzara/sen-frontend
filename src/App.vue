@@ -113,31 +113,32 @@
           </v-list>
         </v-menu>
 
-        <v-menu offset-y :close-on-content-click="false">
+        <v-menu offset-y :close-on-content-click="false" v-if="userIsAuthenticated">
           <v-btn primary flat color="white" slot="activator">
             <v-badge left overlap color="red">
-              <span slot="badge">6</span>
+              <span slot="badge">{{notification_count}}</span>
               <v-icon left dark>notifications</v-icon>
               Notifications
             </v-badge>
           </v-btn>
-          <v-container>
-            <v-layout row wrap>
-              <v-flex xs12 lg12 mb-3>
-                <v-expansion-panel popout>
-                  <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
-                    <div slot="header">Item</div>
-                    <v-card>
-                      <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      </v-card-text>
-                    </v-card>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-flex>
-            </v-layout>
-          </v-container>
+          <app-notification-dropdown></app-notification-dropdown>
+          <!--<v-container>-->
+            <!--<v-layout row wrap>-->
+              <!--<v-flex xs12 lg12 mb-3>-->
+                <!--<v-expansion-panel popout>-->
+                  <!--<v-expansion-panel-content v-for="(item,i) in 5" :key="i">-->
+                    <!--<div slot="header">Item</div>-->
+                    <!--<v-card>-->
+                      <!--<v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
+                        <!--incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation-->
+                        <!--ullamco laboris nisi ut aliquip ex ea commodo consequat.-->
+                      <!--</v-card-text>-->
+                    <!--</v-card>-->
+                  <!--</v-expansion-panel-content>-->
+                <!--</v-expansion-panel>-->
+              <!--</v-flex>-->
+            <!--</v-layout>-->
+          <!--</v-container>-->
         </v-menu>
 
 
@@ -161,13 +162,14 @@
 
 <script>
   import {EventBus} from "./Utility/EventBus";
-
+  import constants from './Utility/constants'
   export default {
     data() {
       return {
         title: 'Placement Portal',
         sideNav: false,
         bus: EventBus,
+        notification_count:0,
       }
     },
     computed: {
@@ -214,8 +216,11 @@
         return this.$store.getters.isLoggedIn
       },
       userIsPlacementCellMember() {
+        //return this.loggedUser.user_TypeFlag === constants.PLACEMEN_CELL_MEMBER_AND_STUDENT
         return true
-        //TODO: Update from vuex for actual user
+      },
+      loggedUser(){
+        return this.$store.getters.loggedUser
       }
     },
     methods: {
@@ -227,6 +232,9 @@
     mounted() {
       this.bus.$on('notify-me', data => {
       });
+      this.bus.$on('notifications-loaded', data => {
+        this.notification_count = data.count
+      })
     }
   }
 </script>
