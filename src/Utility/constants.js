@@ -27,6 +27,10 @@ const constants = {
   QUESTION_PROGRESS_SAVED:'Progress Saved!',
   SIGN_OUT:'Signed Out!',
   NOTIFICATION_SENT:'Notification Sent!',
+  ITEM_DELETED:'Item Deleted Successfully',
+  DEFAULT_PASSWORD:'adminadmin',
+  RELOGIN:'Re-login for a better experience',
+
 
   //Validations
   RULES: {

@@ -1,7 +1,9 @@
 <template>
   <v-container>
-    <h2>Student Dashboard</h2>
-    <app-chart-student-progress></app-chart-student-progress>
+    <h2>Questions Progress</h2>
+    <v-layout row wrap>
+      <app-chart-student-progress></app-chart-student-progress>
+    </v-layout>
   </v-container>
 </template>
 <script>

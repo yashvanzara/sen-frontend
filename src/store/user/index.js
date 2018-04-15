@@ -3,6 +3,8 @@ import CONSTANTS from '../../Utility/constants'
 import constants from '../../Utility/constants'
 const BASE_URL = constants.BASE_URL
 const MODEL_URL = '/user/'
+import {EventBus} from "../../Utility/EventBus";
+
 export default {
   state: {
     registeredUser:{
@@ -82,9 +84,18 @@ export default {
           console.log(error)
         })
     },
-    updateUser({commit, getters}, payload){
+    updateUser({commit, getters, dispatch}, payload){
       axios.put(BASE_URL + MODEL_URL + payload.user_StudentId, payload)
         .then(response => {
+          if(payload.user_StudentId === getters.loggedUser.user_StudentId){
+            dispatch('signOut')
+            EventBus.$emit('notify-me', {
+              data:{
+                title:constants.RELOGIN,
+                status:constants.COLOUR_GREEN
+              }
+            })
+          }
           commit('updateUser', payload)
         })
         .catch(error => {

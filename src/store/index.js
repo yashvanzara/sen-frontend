@@ -19,6 +19,7 @@ import loadedTemplates from './messagetemplate'
 import appLoaded from './shared'
 import loadedNotifications from './notifications'
 import loadedNotificationInstances from './notificationreceiver'
+import loadedJobOpeningRegistrations from './jobopeningregistrations'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -41,6 +42,7 @@ export const store = new Vuex.Store({
     templates:loadedTemplates,
     app:appLoaded,
     notifications:loadedNotifications,
-    notificationInstances:loadedNotificationInstances
+    notificationInstances:loadedNotificationInstances,
+    jobopeningregistrations:loadedJobOpeningRegistrations
   }
 })

@@ -21,7 +21,9 @@ import PageNotFoundComponent from '../components/Pages/404'
 import SolveSingleCompanyQuestions from '../components/Training/CompanyQuestions'
 import ListJobOpeningsComponent from '../components/Placement/ListJobOpenings'
 import SendNotificationComponent from '../components/Notification/SendNotificationComponent'
+import JobOpeningRegistrationsComponent from '../components/Placement/JobOpeningRegistrations'
 import AuthGuard from './auth-guard'
+
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -31,106 +33,111 @@ export default new Router({
       component: Home
     },
     {
-      path:'/login',
-      name:'Login',
-      component:LoginComponent
+      path: '/login',
+      name: 'Login',
+      component: LoginComponent
     },
     {
-      path:'/studentregister',
-      name:'StudentRegister',
-      component:StudentRegisterComponent
+      path: '/studentregister',
+      name: 'StudentRegister',
+      component: StudentRegisterComponent
     },
     {
-      path:'/jobopening/new/',
-      name:'NewJobOpening',
-      component:AddJobOpeningComponent
+      path: '/jobopening/new/',
+      name: 'NewJobOpening',
+      component: AddJobOpeningComponent
     },
     {
-      path:'/manage/programs/',
-      name:'ManagePrograms',
-      component:ProgramComponent
+      path: '/manage/programs/',
+      name: 'ManagePrograms',
+      component: ProgramComponent
     },
     {
-      path:'/manage/companies/',
-      name:'ManageCompanies',
-      component:CompanyComponent
+      path: '/manage/companies/',
+      name: 'ManageCompanies',
+      component: CompanyComponent
     },
     {
-      path:'/manage/users/',
-      name:'ManageUsers',
-      component:UserComponent
+      path: '/manage/users/',
+      name: 'ManageUsers',
+      component: UserComponent
     },
     {
-      path:'/manage/tags/',
-      name:'ManageTags',
-      component:QuestionTagsComponent
+      path: '/manage/tags/',
+      name: 'ManageTags',
+      component: QuestionTagsComponent
     },
     {
-      path:'/manage/questions/',
-      name:'ManageQuestions',
-      component:QuestionComponent
+      path: '/manage/questions/',
+      name: 'ManageQuestions',
+      component: QuestionComponent
     },
     {
-      path:'/manage/jobprofiles/',
-      name:'ManageJobProfiles',
-      component:JobProfileComponent
+      path: '/manage/jobprofiles/',
+      name: 'ManageJobProfiles',
+      component: JobProfileComponent
     },
     {
-      path:'/manage/placementseasons/',
-      name:'ManagePlacementSeasons',
-      component:PlacementSeasonComponent
+      path: '/manage/placementseasons/',
+      name: 'ManagePlacementSeasons',
+      component: PlacementSeasonComponent
     },
     {
-      path:'/manage/placementpolicies/',
-      name:'ManagePlacementPolicies',
-      component:PlacementPolicyComponent
+      path: '/manage/placementpolicies/',
+      name: 'ManagePlacementPolicies',
+      component: PlacementPolicyComponent
     },
     {
-      path:'/profile',
-      name:'ProfileHolder',
-      component:ProfileHolderComponent,
-      beforeEnter:AuthGuard
+      path: '/profile',
+      name: 'ProfileHolder',
+      component: ProfileHolderComponent,
+      beforeEnter: AuthGuard
     },
     {
-      path:'/training/addquestion/',
-      name:'AddQuestion',
-      component:AddQuestionComponent
+      path: '/training/addquestion/',
+      name: 'AddQuestion',
+      component: AddQuestionComponent
     },
     {
-      path:'/practice/company/',
-      name:'PracticeCompanySection',
-      component:PracticeCompanyComponent
+      path: '/practice/company/',
+      name: 'PracticeCompanySection',
+      component: PracticeCompanyComponent
     },
     {
-      path:'/practice/category/:category_id',
-      name:'PracticeCategorySectionId',
-      component:PracticeCategoryComponent
+      path: '/practice/category/:category_id',
+      name: 'PracticeCategorySectionId',
+      component: PracticeCategoryComponent
     },
     {
-      path:'/practice/category/',
-      name:'PracticeCategorySection',
-      component:PracticeCategoryComponent
+      path: '/practice/category/',
+      name: 'PracticeCategorySection',
+      component: PracticeCategoryComponent
     },
     {
-      path:'/404/',
-      name:'404NotFound',
-      component:PageNotFoundComponent
+      path: '/404/',
+      name: '404NotFound',
+      component: PageNotFoundComponent
     },
     {
-      path:'/practice/company/:id',
-      name:'solvesinglecompanyquestions',
-      component:SolveSingleCompanyQuestions
+      path: '/practice/company/:id',
+      name: 'solvesinglecompanyquestions',
+      component: SolveSingleCompanyQuestions
     },
     {
-      path:'/jobopenings/',
-      name:'ListJobOpenings',
-      component:ListJobOpeningsComponent
+      path: '/jobopenings/',
+      name: 'ListJobOpenings',
+      component: ListJobOpeningsComponent
     },
     {
-      path:'/sendnotifications/',
-      name:'SendNotifications',
-      component:SendNotificationComponent
+      path: '/sendnotifications/',
+      name: 'SendNotifications',
+      component: SendNotificationComponent
     },
+    {
+      path: '/jobopeningregistrations/:id',
+      name: 'JobOpeningRegistrations',
+      component: JobOpeningRegistrationsComponent
+    }
   ],
-  mode:'history',
+  mode: 'history',
 })

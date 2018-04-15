@@ -36,6 +36,7 @@ import CompanyQuestionComponent from './components/Utility/CompanyQuestionsCompo
 import PageNotFoundComponent from './components/Pages/404'
 import NotificationComponent from './components/Notification/NotificationComponent'
 import SendNotificationComponent from './components/Notification/SendNotificationComponent'
+import JobOpeningRegistrationsComponent from './components/Placement/JobOpeningRegistrations'
 import StarRating from 'vue-star-rating'
 import VueStars from 'vue-stars'
 Vue.use(VueMoment)
@@ -87,6 +88,7 @@ Vue.component('app-message-template', MessageTemplateComponent)
 Vue.component('app-company-questions', SolveSingleCompanyComponent)
 Vue.component('app-notification-dropdown', NotificationComponent)
 Vue.component('app-send-notifications', SendNotificationComponent)
+Vue.component('app-job-opening-registrations', JobOpeningRegistrationsComponent)
 Vue.component('app-404', PageNotFoundComponent)
 Vue.config.productionTip = false
 
@@ -116,8 +118,10 @@ new Vue({
     this.$store.dispatch('loadAreaOfInterests')
     this.$store.dispatch('loadQuestionTags')
     this.$store.dispatch('loadNotifications')
+    this.$store.dispatch('loadJobOpeningRegistrations')
     this.$store.dispatch('loadNotificationInstances')
     this.$store.dispatch('loadApp')
+
 
   }
 })

@@ -35,6 +35,7 @@ export default {
           status:constants.COLOUR_RED
         }
       })
+      EventBus.$emit('sign-out', {})
     },
     updateLoggedUser(state, payload){
       state.loggedUser = payload
@@ -46,7 +47,6 @@ export default {
       axios.post(BASE_URL + MODEL_URL, payload)
         .then(response => {
           if(response.data.success){
-            console
             const user = response.data.wholedata.User[0]
             const token = response.data.token
             localStorage.setItem("placement_portal_token", token)

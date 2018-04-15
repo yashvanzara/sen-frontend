@@ -128,7 +128,7 @@
             <v-spacer></v-spacer>
             <v-flex lg4 xs3 sm3>
               <v-text-field label="HSC Percentage" :rules="[constants.RULES.required]"
-                            v-model="user.user_hscmarks"></v-text-field>
+                            v-model="user.user_hscMarks"></v-text-field>
             </v-flex>
           </v-layout>
 

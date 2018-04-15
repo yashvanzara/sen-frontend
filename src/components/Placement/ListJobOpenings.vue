@@ -19,6 +19,11 @@
             <v-icon right>touch_app</v-icon>
           </v-btn>
         </td>
+        <td v-if="userIsPlacementCellMember">
+          <v-btn class="mx-0" primary :to="{ name: 'JobOpeningRegistrations',params: { id: props.item.jobOpening_Id }}">Registrations
+            <v-icon>chevron_right</v-icon>
+          </v-btn>
+        </td>
       </template>
     </v-data-table>
   </v-container>
@@ -43,13 +48,15 @@
       },
       loggedUser() {
         return this.$store.getters.loggedUser
+      },
+      userIsPlacementCellMember(){
+       return this.$store.getters.isPlacementCellMemberAndStudent
       }
     },
     created() {
       this.items = this.$store.getters.loadedJobOpenings
       axios.get(BASE_URL + '/jobasperstudent/' + this.loggedUser.user_StudentId)
         .then(response => {
-          console.log(response.data.data[0].jobOpening_Id)
           for (var i = 0; i < response.data.data.length; ++i) {
             this.eligibleCompanies.push(response.data.data[i].jobOpening_Id)
           }

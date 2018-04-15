@@ -89,6 +89,13 @@
           <v-icon left dark>{{ item.icon }}</v-icon>
           {{ item.name }}
         </v-btn>
+        <v-btn
+          v-if="userIsPlacementCellMember"
+          flat
+          to="/jobopening/new/">
+          <v-icon left dark>work</v-icon>
+          Add Job Opening
+        </v-btn>
         <v-menu offset-y v-if="userIsAuthenticated">
           <v-btn primary flat color="white" slot="activator">
             <v-icon left dark right>chrome_reader_mode</v-icon>
@@ -96,18 +103,6 @@
           </v-btn>
           <v-list>
             <v-list-tile v-for="item in trainingItems" :key="item.name" :to="item.link">
-              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
-
-        <v-menu offset-y v-if="userIsPlacementCellMember">
-          <v-btn primary flat color="white" slot="activator">
-            <v-icon left dark right>settings</v-icon>
-            Manage
-          </v-btn>
-          <v-list>
-            <v-list-tile v-for="item in manageItems" :key="item.name" :to="item.link">
               <v-list-tile-title>{{ item.name }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
@@ -122,26 +117,17 @@
             </v-badge>
           </v-btn>
           <app-notification-dropdown></app-notification-dropdown>
-          <!--<v-container>-->
-            <!--<v-layout row wrap>-->
-              <!--<v-flex xs12 lg12 mb-3>-->
-                <!--<v-expansion-panel popout>-->
-                  <!--<v-expansion-panel-content v-for="(item,i) in 5" :key="i">-->
-                    <!--<div slot="header">Item</div>-->
-                    <!--<v-card>-->
-                      <!--<v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor-->
-                        <!--incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation-->
-                        <!--ullamco laboris nisi ut aliquip ex ea commodo consequat.-->
-                      <!--</v-card-text>-->
-                    <!--</v-card>-->
-                  <!--</v-expansion-panel-content>-->
-                <!--</v-expansion-panel>-->
-              <!--</v-flex>-->
-            <!--</v-layout>-->
-          <!--</v-container>-->
         </v-menu>
-
-
+        <v-menu offset-y v-if="userIsPlacementCellMember">
+          <v-btn primary flat color="white" slot="activator">
+            <v-icon left dark right>settings</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile v-for="item in manageItems" :key="item.name" :to="item.link">
+              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
         <v-btn
           v-if="userIsAuthenticated"
           flat
@@ -177,9 +163,9 @@
         let menuItems;
         if (this.userIsAuthenticated) {
           menuItems = [
+            {link: '/jobopenings/', icon: 'list', name: 'Job Openings'},
             {link: '/profile', icon: 'face', name: 'Profile'},
-            {link: '/jobopening/new', icon: 'work', name: 'Add Job Opening'},
-            {link: '/jobopenings/', icon: 'list', name: 'View Job Openings'},
+            //{link: '/jobopening/new', icon: 'work', name: 'Add Job Opening'},
           ]
         } else {
           menuItems = [
@@ -216,11 +202,17 @@
         return this.$store.getters.isLoggedIn
       },
       userIsPlacementCellMember() {
-        //return this.loggedUser.user_TypeFlag === constants.PLACEMEN_CELL_MEMBER_AND_STUDENT
-        return true
+        if(this.userIsAuthenticated){
+          return this.$store.getters.isPlacementCellMemberAndStudent
+        }
+        return false
       },
       loggedUser(){
-        return this.$store.getters.loggedUser
+        if(this.userIsAuthenticated){
+          return this.$store.getters.loggedUser
+        }
+        return null
+
       }
     },
     methods: {
@@ -234,6 +226,9 @@
       });
       this.bus.$on('notifications-loaded', data => {
         this.notification_count = data.count
+      })
+      this.bus.$on('sign-out', data=>{
+        this.$router.push('/')
       })
     }
   }

@@ -141,7 +141,6 @@
           company_Information: "",
           company_IsActive: 0,
         },
-        bus: EventBus
       }
     },
     watch: {
@@ -168,6 +167,12 @@
         var cnfm = confirm('Are you sure you want to delete this item?')
         if (cnfm === true) {
           this.$store.dispatch('deleteCompany', this.loadedCompanies[index])
+          EventBus.$emit('notify-me', {
+            data: {
+              title: constants.ITEM_DELETED,
+              status:constants.COLOUR_GREEN
+            }
+          })
         }
       },
       close() {
@@ -181,11 +186,18 @@
         if (this.editedIndex > -1) {
           this.$store.dispatch('updateCompany', this.editedItem)
           this.items = this.$store.getters.loadedCompanies
+          EventBus.$emit('notify-me', {
+            data: {
+              title: constants.CHANGES_SAVED,
+              status:constants.COLOUR_GREEN
+            }
+          })
         } else {
           this.$store.dispatch('createCompany', this.editedItem)
-          this.bus.$emit('notify-me', {
+          EventBus.$emit('notify-me', {
             data: {
               title: constants.COMPANY_CREATED,
+              status:constants.COLOUR_GREEN
             }
           })
         }

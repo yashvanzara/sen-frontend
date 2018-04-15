@@ -90,6 +90,7 @@
     methods: {
       updateProfile() {
         if (!this.disabled) {
+          console.log(this.updatingObject)
           this.$store.dispatch('updateUser', this.updatingObject)
           this.$store.dispatch('updateLoggedUser', this.updatingObject)
           this.originalObject = Object.assign({}, this.updatingObject)
