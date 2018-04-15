@@ -118,20 +118,13 @@
               label="Programs"
               v-model="open_for_programs"
               :items="loadedPrograms"
-              item-value="program_id"
+              item-value="program_Id"
+              chips
+              deletable-chips
               item-text="program_Name"
               multiple
-              chips
+              autocomplete
             >
-              <template slot="selection" slot-scope="data">
-                <v-chip
-                  close
-                  @input="remove(data.item)"
-                  :selected="data.selected"
-                >
-                  <strong>{{ data.item.program_Name }}</strong>&nbsp;
-                </v-chip>
-              </template>
             </v-select>
           </v-flex>
         </v-layout>
@@ -238,8 +231,12 @@
     },
     methods: {
       createJobOpening() {
+        console.log(this.loadedPrograms)
         for (var c in this.new_job_opening) {
           console.log(c + ":" + this.new_job_opening[c])
+        }
+        for(var i=0; i<this.open_for_programs.length; ++i){
+          console.log(this.open_for_programs[i].program_id)
         }
         console.log(this.open_for_programs)
         if (new Date(this.new_job_opening.jobOpening_RegistrationStartDate) > new Date(this.new_job_opening.jobOpening_RegistrationEndDate)) {
@@ -250,7 +247,15 @@
             }
           })
         } else {
-          this.$store.dispatch('createJobOpening', this.new_job_opening)
+          console.log(this.open_for_programs)
+          let payload = {
+            data:this.new_job_opening,
+            openings:this.open_for_programs
+          }
+          this.$store.dispatch('createJobOpening', payload)
+            .then(()=>{
+              this.$router.push('/')
+            })
           this.bus.$emit('notify-me', {
             data: {
               title: constants.OPENING_CREATED,

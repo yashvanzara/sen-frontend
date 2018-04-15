@@ -20,10 +20,23 @@ export default {
   },
   actions:{
     createJobOpening({commit, getters, dispatch}, payload){
-      axios.post(BASE_URL + MODEL_URL, payload)
+      axios.post(BASE_URL + MODEL_URL, payload.data)
         .then(response => {
-          console.log(response.data)
-          dispatch('loadJobOpenings')
+          var opening_id = response.data.openings[0].jobOpening_Id
+          let opening_payload = {
+            ...payload.data,
+          }
+          opening_payload.jobOpening_Id = opening_id
+          commit('createJobOpening', opening_payload)
+          for(var i=0; i<payload.openings.length; ++i){
+            let prog_opening_payload = {
+              programOpening_Batch:2018,
+              programOpening_ProgramId:payload.openings[i],
+              programOpening_OpeningId:opening_id
+            }
+            dispatch('addProgramOpening', prog_opening_payload)
+          }
+          //dispatch('loadJobOpenings')
         })
         .catch(error => {
           console.log(error)

@@ -22,6 +22,7 @@ import SolveSingleCompanyQuestions from '../components/Training/CompanyQuestions
 import ListJobOpeningsComponent from '../components/Placement/ListJobOpenings'
 import SendNotificationComponent from '../components/Notification/SendNotificationComponent'
 import JobOpeningRegistrationsComponent from '../components/Placement/JobOpeningRegistrations'
+import AddInterviewExperienceComponent from '../components/Training/AddInterviewExperience'
 import AuthGuard from './auth-guard'
 
 Vue.use(Router)
@@ -137,6 +138,11 @@ export default new Router({
       path: '/jobopeningregistrations/:id',
       name: 'JobOpeningRegistrations',
       component: JobOpeningRegistrationsComponent
+    },
+    {
+      path: '/training/addexperience/',
+      name: 'AddInterviewExperience',
+      component: AddInterviewExperienceComponent
     }
   ],
   mode: 'history',

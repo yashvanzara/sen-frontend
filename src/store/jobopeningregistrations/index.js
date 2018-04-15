@@ -14,12 +14,23 @@ export default {
   mutations:{
     setLoadedJobOpeningRegistrations(state, payload){
       state.loadedJobOpeningRegistrations = payload
+    },
+    addJobOpeningRegistration(state, payload){
+      state.loadedJobOpeningRegistrations.push(payload)
     }
   },
   actions: {
     registerForJobOpening({commit, getters, dispatch}, payload) {
       axios.post(BASE_URL + MODEL_URL, payload)
         .then(response => {
+          var dt = new Date();
+          var utcDate = dt.toUTCString();
+          let commit_data={
+            ...payload,
+            jobOpeningRegistration_Timestamp:utcDate
+          }
+          commit('addJobOpeningRegistration', commit_data)
+          console.log(payload)
           console.log(response.data)
           if ('code' in response.data) {
             if (response.data.code === 'ER_DUP_ENTRY') {
@@ -30,6 +41,13 @@ export default {
                 }
               })
             }
+          }else{
+            EventBus.$emit('notify-me', {
+              data: {
+                title: constants.REGISTERED_FOR_OPENING,
+                status: constants.COLOUR_GREEN
+              }
+            })
           }
         })
         .catch(error => {

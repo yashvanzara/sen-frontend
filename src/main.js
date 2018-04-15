@@ -37,6 +37,7 @@ import PageNotFoundComponent from './components/Pages/404'
 import NotificationComponent from './components/Notification/NotificationComponent'
 import SendNotificationComponent from './components/Notification/SendNotificationComponent'
 import JobOpeningRegistrationsComponent from './components/Placement/JobOpeningRegistrations'
+import AddInterviewExperienceComponent from './components/Training/AddInterviewExperience'
 import StarRating from 'vue-star-rating'
 import VueStars from 'vue-stars'
 Vue.use(VueMoment)
@@ -90,6 +91,7 @@ Vue.component('app-notification-dropdown', NotificationComponent)
 Vue.component('app-send-notifications', SendNotificationComponent)
 Vue.component('app-job-opening-registrations', JobOpeningRegistrationsComponent)
 Vue.component('app-404', PageNotFoundComponent)
+Vue.component('app-interview-experience-component', AddInterviewExperienceComponent)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -121,7 +123,6 @@ new Vue({
     this.$store.dispatch('loadJobOpeningRegistrations')
     this.$store.dispatch('loadNotificationInstances')
     this.$store.dispatch('loadApp')
-
-
+    this.$store.dispatch('loadProgramOpenings')
   }
 })

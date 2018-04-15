@@ -11,7 +11,7 @@
         <td>{{ props.item.jobOpening_Id }}</td>
         <td>{{ companyFromId(props.item.jobOpening_CompanyId).company_Name }}</td>
         <td class="right mr-5 justify-center layout px-0">
-          <v-btn v-if="checkEligibility(props.item)===true" color="green" raised dark class="mx-0"
+          <v-btn v-if="checkEligibility(props.item)" color="green" raised dark class="mx-0"
                  @click="registerForOpening(props.item)">Register
             <v-icon right>touch_app</v-icon>
           </v-btn>
