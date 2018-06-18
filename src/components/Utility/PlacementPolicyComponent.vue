@@ -1,6 +1,6 @@
 <template>
   <v-container mt-0>
-    <v-dialog v-model="dialog" max-width="450px">
+    <v-dialog v-model="dialog" max-width="450px" @keydown.esc="dialog=false">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Placement Policy</v-btn>
       <v-card>
         <v-card-title>
@@ -21,15 +21,15 @@
             </v-layout>
 
             <v-layout row wrap>
-              <v-text-field v-model="editedItem.spcPolicy_CriteareaOrCategory" label="Category (A1:1, A:2, B:3)"></v-text-field>
+              <v-text-field :rules="[constants.RULES.required]" v-model="editedItem.spcPolicy_CriteareaOrCategory" label="Category (A1:1, A:2, B:3)"></v-text-field>
             </v-layout>
 
             <v-layout row wrap>
-              <v-text-field v-model="editedItem.spcPolicy_Minimum" label="Minimum Package"></v-text-field>
+              <v-text-field :rules="[constants.RULES.required]" v-model="editedItem.spcPolicy_Minimum" label="Minimum Package"></v-text-field>
             </v-layout>
 
             <v-layout row wrap>
-              <v-text-field v-model="editedItem.spcPolicy_Maximum" label="Maximum Package"></v-text-field>
+              <v-text-field :rules="[constants.RULES.required]" v-model="editedItem.spcPolicy_Maximum" label="Maximum Package"></v-text-field>
             </v-layout>
 
             <v-layout row wrap>
@@ -43,11 +43,11 @@
 
 
             <v-layout row wrap>
-              <v-text-field v-model="editedItem.spcPolicy_Multiplier" label="Switch Multiplier"></v-text-field>
+              <v-text-field :rules="[constants.RULES.required]" v-model="editedItem.spcPolicy_Multiplier" label="Switch Multiplier"></v-text-field>
             </v-layout>
 
             <v-layout row wrap>
-              <v-text-field multi-line v-model="editedItem.spcPolicy_Description" label="Description"></v-text-field>
+              <v-text-field :rules="[constants.RULES.required]" multi-line v-model="editedItem.spcPolicy_Description" label="Description"></v-text-field>
             </v-layout>
 
           </v-container>
@@ -101,10 +101,11 @@
 </template>
 <script>
   import PlacementPolicyModel from '../../models/placementpolicy'
-
+  import constants from '../../Utility/constants'
   export default {
     data() {
       return {
+        constants:constants,
         dialog: false,
         editedIndex: -1,
         search: "",

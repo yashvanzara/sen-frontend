@@ -1,6 +1,6 @@
 <template>
   <v-container mt-0>
-    <v-dialog v-model="dialog" max-width="500px">
+    <v-dialog v-model="dialog" max-width="500px" @keydown.esc="dialog=false">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Student</v-btn>
 
       <v-card>
@@ -12,13 +12,17 @@
             <v-layout row wrap>
               <v-flex>
 
-                <v-text-field v-if="editedIndex===-1" label="Student ID"
+                <v-text-field v-if="editedIndex===-1" label="Student ID" :rules="[constants.RULES.required]"
                               v-model="editedItem.user_StudentId"></v-text-field>
                 <v-text-field v-if="editedIndex!==-1" label="Student ID" v-model="editedItem.user_StudentId"
+                              :rules="[constants.RULES.required]"
                               disabled></v-text-field>
-                <v-text-field label="First Name" v-model="editedItem.user_FirstName"></v-text-field>
-                <v-text-field label="Middle Name" v-model="editedItem.user_MiddleName"></v-text-field>
-                <v-text-field label="Last Name" v-model="editedItem.user_LastName"></v-text-field>
+                <v-text-field label="First Name" v-model="editedItem.user_FirstName"
+                              :rules="[constants.RULES.required]"></v-text-field>
+                <v-text-field label="Middle Name" v-model="editedItem.user_MiddleName"
+                              :rules="[constants.RULES.required]"></v-text-field>
+                <v-text-field label="Last Name" v-model="editedItem.user_LastName"
+                              :rules="[constants.RULES.required]"></v-text-field>
                 <v-menu
                   ref="menu"
                   lazy
@@ -46,25 +50,38 @@
                   ></v-date-picker>
                 </v-menu>
                 <v-text-field label="Permanant address" multi-line
+                              :rules="[constants.RULES.required]"
                               v-model="editedItem.user_AddressPermanent"></v-text-field>
                 <v-text-field label="Current address" multi-line
+                              :rules="[constants.RULES.required]"
                               v-model="editedItem.user_AddressCurrent"></v-text-field>
-                <v-text-field label="Email" v-model="editedItem.user_EmailId"></v-text-field>
-                <v-text-field label="Contact" v-model="editedItem.user_ContactNo"></v-text-field>
-                <v-text-field label="SSC Year" v-model="editedItem.user_SscYear"></v-text-field>
-                <v-text-field label="HSC Year" v-model="editedItem.user_HscYear"></v-text-field>
+                <v-text-field label="Email" v-model="editedItem.user_EmailId"
+                              :rules="[constants.RULES.required]"></v-text-field>
+                <v-text-field label="Contact" v-model="editedItem.user_ContactNo"
+                              :rules="[constants.RULES.required]"></v-text-field>
+                <v-text-field label="SSC Year" v-model="editedItem.user_SscYear"
+                              :rules="[constants.RULES.required]"></v-text-field>
+                <v-text-field label="HSC Year" v-model="editedItem.user_HscYear"
+                              :rules="[constants.RULES.required]"></v-text-field>
                 <v-text-field label="SSC Percentage" :rules="[constants.RULES.required]"
                               v-model="editedItem.user_sscMarks"></v-text-field>
                 <v-text-field label="HSC Percentage" :rules="[constants.RULES.required]"
                               v-model="editedItem.user_hscMarks"></v-text-field>
-                <v-text-field label="Qualifying Board" v-model="editedItem.user_QualifyingBoard"></v-text-field>
+                <v-text-field label="Qualifying Board" v-model="editedItem.user_QualifyingBoard"
+                              :rules="[constants.RULES.required]"></v-text-field>
                 <v-text-field label="Qualifying Percentage"
+                              :rules="[constants.RULES.required]"
                               v-model="editedItem.user_QualifyingPercentage"></v-text-field>
-                <v-text-field label="Qualifying Degree" v-model="editedItem.user_QualifyingDegree"></v-text-field>
-                <v-text-field label="Stream" v-model="editedItem.user_Stream"></v-text-field>
-                <v-text-field label="CPI" v-model="editedItem.user_Cpi"></v-text-field>
-                <v-text-field label="Current Backlog" v-model="editedItem.user_CurrentBacklog"></v-text-field>
-                <v-text-field label="Total Backlog" v-model="editedItem.user_TotalBacklog"></v-text-field>
+                <v-text-field label="Qualifying Degree" v-model="editedItem.user_QualifyingDegree"
+                              :rules="[constants.RULES.required]"></v-text-field>
+                <v-text-field label="Stream" v-model="editedItem.user_Stream"
+                              :rules="[constants.RULES.required]"></v-text-field>
+                <v-text-field label="CPI" v-model="editedItem.user_Cpi"
+                              :rules="[constants.RULES.required]"></v-text-field>
+                <v-text-field label="Current Backlog" v-model="editedItem.user_CurrentBacklog"
+                              :rules="[constants.RULES.required]"></v-text-field>
+                <v-text-field label="Total Backlog" v-model="editedItem.user_TotalBacklog"
+                              :rules="[constants.RULES.required]"></v-text-field>
                 <v-select
                   v-bind:items="genders"
                   v-model="editedItem.user_Gender"

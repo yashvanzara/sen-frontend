@@ -34,7 +34,7 @@
     </v-layout>
     <v-layout row wrap>
       <v-spacer></v-spacer>
-      <v-btn>See all notifications</v-btn>
+      <!--<v-btn>See all notifications</v-btn>--><!-- Remove this after adding view all notification feature-->
     </v-layout>
 
 

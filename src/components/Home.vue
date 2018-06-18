@@ -1,16 +1,11 @@
 <template>
   <v-container mt-0>
-    <!--<app-program></app-program>-->
-    <!--<app-company></app-company>-->
-    <!--<app-users></app-users>-->
-    <!--<app-tags></app-tags>-->
-    <!--<app-questions></app-questions>-->
-    <!--<app-job-profile></app-job-profile>-->
-    <!--<app-placement-season></app-placement-season>-->
-    <!--<app-add-job-opening></app-add-job-opening>-->
     <app-spc-dashboard v-if="userIsPlacementCellMember"></app-spc-dashboard>
-
-    <span>{{ new Date() | moment("from", "now") }}</span>
+    <v-layout row wrap v-else>
+      <v-flex xs12 sm12 lg12 md12>
+        <img src="../assets/daiict.png" width="100%">
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 

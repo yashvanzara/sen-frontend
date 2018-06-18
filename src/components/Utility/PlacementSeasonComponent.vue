@@ -1,6 +1,6 @@
 <template>
   <v-container mt-0>
-    <v-dialog v-model="dialog" max-width="350px">
+    <v-dialog v-model="dialog" max-width="350px" @keydown.esc="dialog=false">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Placement Season</v-btn>
       <v-card>
         <v-card-title>
@@ -11,7 +11,7 @@
           <v-container>
             <v-layout row wrap>
               <v-flex>
-                <v-text-field v-model="editedItem.placementSeason_Year" label="Placement Season"></v-text-field>
+                <v-text-field v-model="editedItem.placementSeason_Year" label="Placement Season" :rules="[constants.RULES.required]"></v-text-field>
               </v-flex>
             </v-layout>
 
@@ -60,10 +60,11 @@
 </template>
 <script>
   import PlacementSeasonModel from '../../models/placementseason'
-
+  import constants from '../../Utility/constants'
   export default {
     data() {
       return {
+        constants:constants,
         dialog: false,
         editedIndex: -1,
         search: "",

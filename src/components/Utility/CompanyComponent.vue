@@ -1,6 +1,6 @@
 <template>
   <v-container mt-0>
-    <v-dialog v-model="dialog" max-width="500px" scrollable>
+    <v-dialog v-model="dialog" max-width="500px" scrollable @keydown.esc="dialog=false">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Company</v-btn>
       <v-card>
         <v-card-title>
@@ -10,41 +10,48 @@
           <v-container>
             <v-layout row wrap>
               <v-flex>
-                <v-text-field label="Company Name" v-model="editedItem.company_Name"></v-text-field>
+                <v-text-field label="Company Name" v-model="editedItem.company_Name"
+                              :rules="[constants.RULES.required]"></v-text-field>
               </v-flex>
             </v-layout>
 
             <v-layout row wrap>
               <v-flex>
-                <v-text-field label="Company Website" v-model="editedItem.company_Website"></v-text-field>
+                <v-text-field label="Company Website" v-model="editedItem.company_Website"
+                              :rules="[constants.RULES.required]"></v-text-field>
               </v-flex>
             </v-layout>
 
             <v-layout row wrap>
               <v-flex>
-                <v-text-field label="Company Address" v-model="editedItem.company_Address"></v-text-field>
+                <v-text-field label="Company Address" v-model="editedItem.company_Address"
+                              :rules="[constants.RULES.required]"></v-text-field>
               </v-flex>
             </v-layout>
 
             <v-layout row wrap>
               <v-flex>
-                <v-text-field label="Company Email" v-model="editedItem.company_Email"></v-text-field>
+                <v-text-field label="Company Email" v-model="editedItem.company_Email"
+                              :rules="[constants.RULES.required]"></v-text-field>
               </v-flex>
             </v-layout>
             <v-layout row wrap>
               <v-flex>
-                <v-text-field label="Company Ceo" v-model="editedItem.company_CEO"></v-text-field>
+                <v-text-field label="Company Ceo" v-model="editedItem.company_CEO"
+                              :rules="[constants.RULES.required]"></v-text-field>
               </v-flex>
             </v-layout>
             <v-layout row wrap>
               <v-flex>
-                <v-text-field label="Company Founder" v-model="editedItem.company_Founder"></v-text-field>
+                <v-text-field label="Company Founder" v-model="editedItem.company_Founder"
+                              :rules="[constants.RULES.required]"></v-text-field>
               </v-flex>
             </v-layout>
 
             <v-layout row wrap>
               <v-flex>
                 <v-text-field label="Company Information" v-model="editedItem.company_Information"
+                              :rules="[constants.RULES.required]"
                               multi-line></v-text-field>
               </v-flex>
             </v-layout>
@@ -115,6 +122,7 @@
   export default {
     data() {
       return {
+        constants:constants,
         dialog: false,
         editedIndex: -1,
         search: '',

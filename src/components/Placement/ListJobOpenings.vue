@@ -10,6 +10,8 @@
       <template slot="items" slot-scope="props">
         <td>{{ props.item.jobOpening_Id }}</td>
         <td>{{ companyFromId(props.item.jobOpening_CompanyId).company_Name }}</td>
+        <td>{{ props.item.jobOpening_RegistrationStartDate | moment("from", "now") }}</td>
+        <td>{{ props.item.jobOpening_RegistrationEndDate | moment("from", "now") }}</td>
         <td class="right mr-5 justify-center layout px-0">
           <v-btn v-if="checkEligibility(props.item)" color="green" raised dark class="mx-0"
                  @click="registerForOpening(props.item)">Register

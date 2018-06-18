@@ -1,6 +1,6 @@
 <template>
   <v-container mt-0>
-    <v-dialog v-model="dialog" max-width="850px">
+    <v-dialog v-model="dialog" max-width="850px" @keydown.esc="dialog=false">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Questions asked</v-btn>
       <v-card>
         <v-card-title>

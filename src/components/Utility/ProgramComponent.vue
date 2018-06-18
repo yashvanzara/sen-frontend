@@ -1,7 +1,7 @@
 <template>
   <v-container mt-0>
 
-    <v-dialog v-model="dialog" max-width="300px">
+    <v-dialog v-model="dialog" max-width="300px" @keydown.esc="dialog=false">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Program</v-btn>
 
       <v-card>
@@ -12,7 +12,7 @@
           <v-container>
             <v-layout row wrap>
               <v-flex>
-                <v-text-field label="Program Name" v-model="editedItem.program_Name"></v-text-field>
+                <v-text-field label="Program Name" v-model="editedItem.program_Name" :rules="[constants.RULES.required]"></v-text-field>
               </v-flex>
             </v-layout>
             <v-layout row wrap>
@@ -75,10 +75,11 @@
 </style>
 <script>
   import ProgramModel from '../../models/program'
-
+  import constants from '../../Utility/constants'
   export default {
     data() {
       return {
+        constants:constants,
         dialog: false,
         editedIndex: -1,
 

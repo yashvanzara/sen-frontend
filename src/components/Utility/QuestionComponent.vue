@@ -1,6 +1,6 @@
 <template>
   <v-container mt-0>
-    <v-dialog v-model="dialog" max-width="850px">
+    <v-dialog v-model="dialog" max-width="850px" @keydown.esc="dialog=false">
       <v-btn color="primary" dark slot="activator" class="mb-2">Add Question</v-btn>
       <v-card>
         <v-card-title>
@@ -11,11 +11,11 @@
           <v-container>
             <v-layout row wrap>
               <v-flex>
-                <v-text-field v-model="editedItem.question_Title" label="Question Title"></v-text-field>
+                <v-text-field :rules="[constants.RULES.required]" v-model="editedItem.question_Title" label="Question Title"></v-text-field>
               </v-flex>
             </v-layout>
 
-            <v-text-field disabled label="Description"></v-text-field>
+            <v-text-field :rules="[constants.RULES.required]" disabled label="Description"></v-text-field>
             <mavon-editor v-model="editedItem.question_Description" :placeholder="placeholder"
                           language="en" :toolbars="toolbar"/>
             <v-text-field disabled label="Solution"></v-text-field>
@@ -93,10 +93,12 @@
   import QuestionModel from '../../models/question'
   //TODO: Handle actual user's id when adding login functionality
   import mavon from '../../Utility/mavon'
+  import constants from '../../Utility/constants'
   export default {
 
     data() {
       return {
+        constants:constants,
         loggedUser: {
           user_StudentId: this.$store.getters.loggedUser.user_StudentId
         },

@@ -1,10 +1,13 @@
 <template>
   <v-container mt-0>
-    <h1>{{displayed_company.company_Name}}</h1>
-    <h3>{{displayed_company.company_Information}}</h3>
+    <v-layout row wrap style="background-color: beige; padding: 7px">
+      <h2>{{displayed_company.company_Name}}</h2>
+      <h4>{{displayed_company.company_Information}}</h4>
+    </v-layout>
+
     <v-layout row wrap>
       <v-flex lg6>
-        <h1>{{displayedQuestion.question_Title}}</h1>
+        <h2>{{displayedQuestion.question_Title}}</h2>
       </v-flex>
       <v-flex>
         <v-select

@@ -9,9 +9,18 @@
       </v-flex>
     </v-layout>
     <h2>Placement Cell Dashboard</h2>
-    <app-chart-placed-vs-interested></app-chart-placed-vs-interested>
-    <app-chart-area-of-interest></app-chart-area-of-interest>
-    <app-chart-questions-solved-by-students></app-chart-questions-solved-by-students>
+    <v-layout row wrap>
+      <v-flex xs12 lg6 md6 sm6>
+        <app-chart-placed-vs-interested></app-chart-placed-vs-interested>
+      </v-flex>
+      <v-flex xs12 lg6 md6 sm6>
+        <app-chart-area-of-interest></app-chart-area-of-interest>
+      </v-flex>
+    </v-layout>
+    <v-layout row wrap>
+      <app-chart-questions-solved-by-students></app-chart-questions-solved-by-students>
+    </v-layout>
+
   </v-container>
 </template>
 <script>

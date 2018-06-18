@@ -33,5 +33,14 @@ export default {
       sortable: false,
       value: 'jobOpening_CompanyId'
     },
+    {
+      text: 'Registration Starts',
+      align: 'left',
+    },
+    {
+      text: 'Registration Ends',
+      align: 'left',
+    },
+
   ]
 };

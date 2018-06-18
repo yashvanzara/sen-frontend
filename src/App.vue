@@ -178,10 +178,11 @@
       },
       trainingItems() {
         let trainingItems = [
-          {link: '/training/addexperience/', icon: 'domain', name: 'Add interview experience'},
+          // {link: '/training/addexperience/', icon: 'domain', name: 'Add interview experience'},
+          //Include after feature is implemented
           {link: '/training/addquestion/', icon: 'domain', name: 'Add interview questions'},
-          {link: '/practice/category', icon: 'domain', name: 'Practice questions'},
-          // {link: '/practice/company', icon: 'domain', name: 'Practice Company questions'},
+          // {link: '/practice/category', icon: 'domain', name: 'Practice questions'},
+          {link: '/practice/company', icon: 'domain', name: 'Practice Company questions'},
         ]
         return trainingItems
       },
